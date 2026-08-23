@@ -1,5 +1,43 @@
 [
   {
+    "payment_id": "pay_TTClB1Ydmib0SX",
+    "customer_id": "CUST_LIVE_001",
+    "customer_name": "Ahan Live Test",
+    "amount": 100.0,
+    "currency": "INR",
+    "payment_type": "payment_link",
+    "failure_code": "CARD_DECLINED",
+    "error_description": "Initial card failure recovered via live Netbanking link.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.99,
+    "classification_reasoning": "Initial checkout decline resolved via live Razorpay Payment Link.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "recovered",
+    "verification": "live_verified",
+    "action_details": {
+      "payment_link_id": "plink_TTCkFOP3t6Wh6x",
+      "short_url": "https://rzp.io/rzp/T2SH1YC",
+      "amount_inr": 100.0
+    },
+    "customer_notification": {
+      "channel_sms": "Live payment recovered successfully!"
+    },
+    "timestamp": "2026-08-23T17:35:16",
+    "webhook_captured_at": "2026-08-23T17:35:16.933482",
+    "recovered_amount": 100.0,
+    "webhook_metadata": {
+      "event": "payment.captured",
+      "method": "netbanking",
+      "bank": "BARB_R",
+      "live_payment_id": "pay_TTClB1Ydmib0SX"
+    }
+  },
+  {
     "payment_id": "pay_syn_0001_5506",
     "customer_id": "CUST_0001",
     "customer_name": "Sai Rao",

@@ -1,0 +1,409 @@
+[
+  {
+    "received_at": "2026-08-23T17:05:59.785374",
+    "source": "live_razorpay_webhook",
+    "event": "payment.failed",
+    "data": {
+      "entity": "event",
+      "account_id": "acc_TTBPhPQ85DOVak",
+      "event": "payment.failed",
+      "contains": [
+        "payment"
+      ],
+      "payload": {
+        "payment": {
+          "entity": {
+            "id": "pay_TTCGJQprT0FG1Q",
+            "entity": "payment",
+            "amount": 10000,
+            "currency": "INR",
+            "status": "failed",
+            "order_id": "order_TTCFD1R92pF5r6",
+            "international": true,
+            "method": "card",
+            "amount_refunded": 0,
+            "refund_status": null,
+            "captured": false,
+            "description": "#TTCEypkjvCLdTb",
+            "card_id": "card_TTCGJdIdRWn03f",
+            "card": {
+              "id": "card_TTCGJdIdRWn03f",
+              "entity": "card",
+              "name": "fffff",
+              "last4": "1111",
+              "network": "Visa",
+              "type": "debit",
+              "issuer": null,
+              "international": true,
+              "emi": false,
+              "sub_type": "consumer",
+              "token_iin": "411111111"
+            },
+            "email": "mullickahan@gmail.com",
+            "contact": "+919014018689",
+            "notes": [],
+            "fee": null,
+            "tax": null,
+            "error_code": "BAD_REQUEST_ERROR",
+            "error_description": "Your payment could not be completed as this business accepts domestic (Indian) card payments only. Try another payment method.",
+            "error_source": "business",
+            "error_step": "payment_initiation",
+            "error_reason": "international_transaction_not_allowed",
+            "acquirer_data": {
+              "auth_code": null
+            },
+            "created_at": 1787484959
+          }
+        }
+      },
+      "created_at": 1787484959
+    }
+  },
+  {
+    "received_at": "2026-08-23T17:07:13.041948",
+    "source": "live_razorpay_webhook",
+    "event": "payment.failed",
+    "data": {
+      "entity": "event",
+      "account_id": "acc_TTBPhPQ85DOVak",
+      "event": "payment.failed",
+      "contains": [
+        "payment"
+      ],
+      "payload": {
+        "payment": {
+          "entity": {
+            "id": "pay_TTCHcCtmNlNfxC",
+            "entity": "payment",
+            "amount": 10000,
+            "currency": "INR",
+            "status": "failed",
+            "order_id": "order_TTCFD1R92pF5r6",
+            "international": true,
+            "method": "card",
+            "amount_refunded": 0,
+            "refund_status": null,
+            "captured": false,
+            "description": "#TTCEypkjvCLdTb",
+            "card_id": "card_TTCHcPIO9Pflbg",
+            "card": {
+              "id": "card_TTCHcPIO9Pflbg",
+              "entity": "card",
+              "name": "nae",
+              "last4": "1111",
+              "network": "Visa",
+              "type": "debit",
+              "issuer": null,
+              "international": true,
+              "emi": false,
+              "sub_type": "consumer",
+              "token_iin": "411111111"
+            },
+            "email": "mullickahan@gmail.com",
+            "contact": "+919014018689",
+            "notes": [],
+            "fee": null,
+            "tax": null,
+            "error_code": "BAD_REQUEST_ERROR",
+            "error_description": "Your payment could not be completed as this business accepts domestic (Indian) card payments only. Try another payment method.",
+            "error_source": "business",
+            "error_step": "payment_initiation",
+            "error_reason": "international_transaction_not_allowed",
+            "acquirer_data": {
+              "auth_code": null
+            },
+            "created_at": 1787485033
+          }
+        }
+      },
+      "created_at": 1787485033
+    }
+  },
+  {
+    "received_at": "2026-08-23T17:07:54.326374",
+    "source": "live_razorpay_webhook",
+    "event": "payment.failed",
+    "data": {
+      "entity": "event",
+      "account_id": "acc_TTBPhPQ85DOVak",
+      "event": "payment.failed",
+      "contains": [
+        "payment"
+      ],
+      "payload": {
+        "payment": {
+          "entity": {
+            "id": "pay_TTCIL0hyY3nRLI",
+            "entity": "payment",
+            "amount": 10000,
+            "currency": "INR",
+            "status": "failed",
+            "order_id": "order_TTCFD1R92pF5r6",
+            "international": true,
+            "method": "card",
+            "amount_refunded": 0,
+            "refund_status": null,
+            "captured": false,
+            "description": "#TTCEypkjvCLdTb",
+            "card_id": "card_TTCILG3xyUlclC",
+            "card": {
+              "id": "card_TTCILG3xyUlclC",
+              "entity": "card",
+              "name": "nae",
+              "last4": "1111",
+              "network": "Visa",
+              "type": "debit",
+              "issuer": null,
+              "international": true,
+              "emi": false,
+              "sub_type": "consumer",
+              "token_iin": "411111111"
+            },
+            "email": "mullickahan@gmail.com",
+            "contact": "+919014018689",
+            "token_id": "token_TTCILbb9QJ09NL",
+            "notes": [],
+            "fee": null,
+            "tax": null,
+            "error_code": "BAD_REQUEST_ERROR",
+            "error_description": "Your payment could not be completed as this business accepts domestic (Indian) card payments only. Try another payment method.",
+            "error_source": "business",
+            "error_step": "payment_initiation",
+            "error_reason": "international_transaction_not_allowed",
+            "acquirer_data": {
+              "auth_code": null
+            },
+            "created_at": 1787485074
+          }
+        }
+      },
+      "created_at": 1787485074
+    }
+  },
+  {
+    "received_at": "2026-08-23T17:09:26.051516",
+    "source": "live_razorpay_webhook",
+    "event": "payment.failed",
+    "data": {
+      "entity": "event",
+      "account_id": "acc_TTBPhPQ85DOVak",
+      "event": "payment.failed",
+      "contains": [
+        "payment"
+      ],
+      "payload": {
+        "payment": {
+          "entity": {
+            "id": "pay_TTCJxOko0XnQA8",
+            "entity": "payment",
+            "amount": 10000,
+            "currency": "INR",
+            "status": "failed",
+            "order_id": "order_TTCFD1R92pF5r6",
+            "international": true,
+            "method": "card",
+            "amount_refunded": 0,
+            "refund_status": null,
+            "captured": false,
+            "description": "#TTCEypkjvCLdTb",
+            "card_id": "card_TTCJxbNtbcAkPP",
+            "card": {
+              "id": "card_TTCJxbNtbcAkPP",
+              "entity": "card",
+              "name": "nae",
+              "last4": "1112",
+              "network": "Visa",
+              "type": "debit",
+              "issuer": null,
+              "international": true,
+              "emi": false,
+              "sub_type": "consumer",
+              "token_iin": "401200103"
+            },
+            "email": "mullickahan@gmail.com",
+            "contact": "+919014018689",
+            "token_id": "token_TTCJxsKOUNHjSw",
+            "notes": [],
+            "fee": null,
+            "tax": null,
+            "error_code": "BAD_REQUEST_ERROR",
+            "error_description": "Your payment could not be completed as this business accepts domestic (Indian) card payments only. Try another payment method.",
+            "error_source": "business",
+            "error_step": "payment_initiation",
+            "error_reason": "international_transaction_not_allowed",
+            "acquirer_data": {
+              "auth_code": null
+            },
+            "created_at": 1787485166
+          }
+        }
+      },
+      "created_at": 1787485166
+    }
+  },
+  {
+    "received_at": "2026-08-23T17:14:02.704391",
+    "source": "live_razorpay_webhook",
+    "event": "payment.failed",
+    "data": {
+      "entity": "event",
+      "account_id": "acc_TTBPhPQ85DOVak",
+      "event": "payment.failed",
+      "contains": [
+        "payment"
+      ],
+      "payload": {
+        "payment": {
+          "entity": {
+            "id": "pay_TTCOpQutQTyLCO",
+            "entity": "payment",
+            "amount": 10000,
+            "currency": "INR",
+            "status": "failed",
+            "order_id": "order_TTCFD1R92pF5r6",
+            "international": true,
+            "method": "card",
+            "amount_refunded": 0,
+            "refund_status": null,
+            "captured": false,
+            "description": "#TTCEypkjvCLdTb",
+            "card_id": "card_TTCOpcKVFeUYCP",
+            "card": {
+              "id": "card_TTCOpcKVFeUYCP",
+              "entity": "card",
+              "name": "nae",
+              "last4": "1111",
+              "network": "Visa",
+              "type": "debit",
+              "issuer": null,
+              "international": true,
+              "emi": false,
+              "sub_type": "consumer",
+              "token_iin": "411111111"
+            },
+            "email": "mullickahan@gmail.com",
+            "contact": "+919014018689",
+            "token_id": "token_TTCILbb9QJ09NL",
+            "notes": [],
+            "fee": null,
+            "tax": null,
+            "error_code": "BAD_REQUEST_ERROR",
+            "error_description": "Your payment could not be completed as this business accepts domestic (Indian) card payments only. Try another payment method.",
+            "error_source": "business",
+            "error_step": "payment_initiation",
+            "error_reason": "international_transaction_not_allowed",
+            "acquirer_data": {
+              "auth_code": null
+            },
+            "created_at": 1787485443
+          }
+        }
+      },
+      "created_at": 1787485443
+    }
+  },
+  {
+    "received_at": "2026-08-23T17:17:37.738793",
+    "source": "live_razorpay_webhook",
+    "event": "payment.failed",
+    "data": {
+      "entity": "event",
+      "account_id": "acc_TTBPhPQ85DOVak",
+      "event": "payment.failed",
+      "contains": [
+        "payment"
+      ],
+      "payload": {
+        "payment": {
+          "entity": {
+            "id": "pay_TTCSV8slISbw84",
+            "entity": "payment",
+            "amount": 10000,
+            "currency": "INR",
+            "status": "failed",
+            "order_id": "order_TTCFD1R92pF5r6",
+            "invoice_id": null,
+            "international": false,
+            "method": "netbanking",
+            "amount_refunded": 0,
+            "refund_status": null,
+            "captured": false,
+            "description": "#TTCEypkjvCLdTb",
+            "card_id": null,
+            "bank": "UTBI",
+            "wallet": null,
+            "vpa": null,
+            "email": "void@razorpay.com",
+            "contact": "+919014018689",
+            "notes": [],
+            "fee": null,
+            "tax": null,
+            "error_code": "BAD_REQUEST_ERROR",
+            "error_description": "Your payment has been cancelled. Try again or complete the payment later.",
+            "error_source": "customer",
+            "error_step": "payment_authentication",
+            "error_reason": "payment_cancelled",
+            "acquirer_data": {
+              "bank_transaction_id": null
+            },
+            "created_at": 1787485651
+          }
+        }
+      },
+      "created_at": 1787485658
+    }
+  },
+  {
+    "received_at": "2026-08-23T17:35:16.933482",
+    "source": "live_razorpay_webhook",
+    "event": "payment.captured",
+    "data": {
+      "entity": "event",
+      "account_id": "acc_TTBPhPQ85DOVak",
+      "event": "payment.captured",
+      "contains": [
+        "payment"
+      ],
+      "payload": {
+        "payment": {
+          "entity": {
+            "id": "pay_TTClB1Ydmib0SX",
+            "entity": "payment",
+            "amount": 10000,
+            "currency": "INR",
+            "status": "captured",
+            "order_id": "order_TTCkzkoC892aMv",
+            "invoice_id": null,
+            "international": false,
+            "method": "netbanking",
+            "amount_refunded": 0,
+            "refund_status": null,
+            "captured": true,
+            "description": "#TTCkFOP3t6Wh6x",
+            "card_id": null,
+            "bank": "BARB_R",
+            "wallet": null,
+            "vpa": null,
+            "email": "void@razorpay.com",
+            "contact": "+919014018689",
+            "notes": [],
+            "fee": 260,
+            "tax": 40,
+            "error_code": null,
+            "error_description": null,
+            "error_source": null,
+            "error_step": null,
+            "error_reason": null,
+            "acquirer_data": {
+              "bank_transaction_id": "5653014"
+            },
+            "created_at": 1787486712,
+            "reward": null,
+            "base_amount": 10000
+          }
+        }
+      },
+      "created_at": 1787486716
+    }
+  }
+]

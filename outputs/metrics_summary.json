@@ -1,16 +1,16 @@
 {
-  "total_records": 100,
-  "total_failed_volume_inr": 168789.0,
+  "total_records": 101,
+  "total_failed_volume_inr": 168889.0,
   "actions_dispatched": {
-    "count": 83,
-    "amount_inr": 135647.0,
-    "dispatch_rate_pct": 80.36,
+    "count": 84,
+    "amount_inr": 135747.0,
+    "dispatch_rate_pct": 80.38,
     "description": "Total payment links generated and recovery workflows dispatched"
   },
   "live_verified_recoveries": {
-    "count": 1,
-    "amount_inr": 1999.0,
-    "recovery_rate_pct": 1.18,
+    "count": 2,
+    "amount_inr": 2099.0,
+    "recovery_rate_pct": 1.24,
     "description": "Actual rupees confirmed collected via cryptographic HMAC-SHA256 Razorpay webhook"
   },
   "demo_verified_recoveries": {
@@ -32,15 +32,15 @@
   "opt_out_suppressed_count": 9,
   "system_errors_count": 0,
   "breakdown_by_failure_type": {
+    "expired_card": {
+      "count": 14,
+      "amount_inr": 22043.0,
+      "action": "create_payment_link"
+    },
     "bank_timeout": {
       "count": 20,
       "amount_inr": 29537.0,
       "action": "retry_payment_link"
-    },
-    "expired_card": {
-      "count": 13,
-      "amount_inr": 21943.0,
-      "action": "create_payment_link"
     },
     "mandate_declined": {
       "count": 5,
