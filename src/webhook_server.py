@@ -86,6 +86,21 @@ def update_audit_log_with_webhook(event_data: Dict[str, Any], verification_tag: 
                 json.dump(audit_records, f, indent=2)
             logger.info(f"Audit log updated to {verification_tag} for payment: {original_payment_id or payment_link_id}")
 
+            # Recalculate metrics & auto-sync README
+            try:
+                from src.metrics import MetricsCalculator
+                from src.executor import sync_readme_metrics
+                calc = MetricsCalculator()
+                metrics = calc.compute_metrics(audit_records)
+                bench_path = os.path.join(BASE_DIR, "outputs", "benchmark_evaluation.json")
+                bench_data = {}
+                if os.path.exists(bench_path):
+                    with open(bench_path, "r", encoding="utf-8") as bf:
+                        bench_data = json.load(bf)
+                sync_readme_metrics(metrics, bench_data)
+            except Exception as se:
+                logger.warning(f"Could not recompute metrics post-webhook: {se}")
+
     except Exception as e:
         logger.error(f"Failed to update audit log from webhook: {e}")
 
@@ -115,12 +130,19 @@ def persist_webhook_event(event_data: Dict[str, Any], source: str = "live_razorp
         logger.error(f"Error persisting webhook event: {e}")
 
 
+@app.get("/")
 @app.get("/health")
 async def health_check():
-    return {"status": "ok", "timestamp": datetime.now().isoformat(), "service": "Razorpay Recovery Webhook Receiver"}
+    return {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "service": "Razorpay Recovery Webhook Receiver",
+        "endpoints": ["/webhook", "/razorpay-webhook", "/simulate-webhook"]
+    }
 
 
 @app.post("/webhook")
+@app.post("/razorpay-webhook")
 async def handle_razorpay_webhook(
     request: Request,
     background_tasks: BackgroundTasks,
