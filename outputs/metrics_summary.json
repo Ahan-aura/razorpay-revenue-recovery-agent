@@ -1,0 +1,56 @@
+{
+  "total_records": 100,
+  "total_failed_volume_inr": 138928.0,
+  "total_recovered_volume_inr": 118333.0,
+  "overall_recovery_rate_pct": 85.18,
+  "live_verified": {
+    "count": 0,
+    "amount_inr": 0,
+    "percentage_of_total": 0.0
+  },
+  "simulated_recovery": {
+    "count": 91,
+    "amount_inr": 118333.0,
+    "percentage_of_total": 85.18
+  },
+  "escalations": {
+    "total": 8,
+    "fraud_blocked": 8,
+    "low_confidence_review": 0,
+    "max_retries_exceeded": 0
+  },
+  "opt_out_suppressed_count": 1,
+  "system_errors_count": 0,
+  "breakdown_by_failure_type": {
+    "bank_timeout": {
+      "count": 18,
+      "amount_inr": 17190.0,
+      "action": "retry_payment_link"
+    },
+    "technical_error": {
+      "count": 12,
+      "amount_inr": 13293.0,
+      "action": "retry_payment_link"
+    },
+    "insufficient_funds": {
+      "count": 24,
+      "amount_inr": 34882.0,
+      "action": "schedule_delayed_retry"
+    },
+    "expired_card": {
+      "count": 19,
+      "amount_inr": 34186.0,
+      "action": "create_payment_link"
+    },
+    "fraud_suspected": {
+      "count": 8,
+      "amount_inr": 20296.0,
+      "action": "escalate_fraud_review"
+    },
+    "mandate_declined": {
+      "count": 19,
+      "amount_inr": 19081.0,
+      "action": "create_payment_link"
+    }
+  }
+}

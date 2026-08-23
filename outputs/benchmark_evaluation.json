@@ -1,0 +1,176 @@
+{
+  "sample_size": 20,
+  "sample_size_note": "Evaluated on hand-labeled held-out test partition (20 rows)",
+  "accuracy_pct": 100.0,
+  "correct_count": 20,
+  "total_count": 20,
+  "per_class_accuracy": {
+    "bank_timeout": 100.0,
+    "technical_error": 100.0,
+    "insufficient_funds": 100.0,
+    "expired_card": 100.0,
+    "fraud_suspected": 100.0
+  },
+  "detailed_predictions": [
+    {
+      "payment_id": "pay_syn_0001_1409",
+      "ground_truth": "bank_timeout",
+      "predicted": "bank_timeout",
+      "confidence": 0.92,
+      "is_correct": true,
+      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+    },
+    {
+      "payment_id": "pay_syn_0003_4257",
+      "ground_truth": "bank_timeout",
+      "predicted": "bank_timeout",
+      "confidence": 0.92,
+      "is_correct": true,
+      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+    },
+    {
+      "payment_id": "pay_syn_0052_6409",
+      "ground_truth": "bank_timeout",
+      "predicted": "bank_timeout",
+      "confidence": 0.92,
+      "is_correct": true,
+      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+    },
+    {
+      "payment_id": "pay_syn_0035_5272",
+      "ground_truth": "bank_timeout",
+      "predicted": "bank_timeout",
+      "confidence": 0.92,
+      "is_correct": true,
+      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+    },
+    {
+      "payment_id": "pay_syn_0097_6280",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "reasoning": "Generic gateway failure or transient network switch glitch."
+    },
+    {
+      "payment_id": "pay_syn_0095_2169",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "reasoning": "Generic gateway failure or transient network switch glitch."
+    },
+    {
+      "payment_id": "pay_syn_0002_2424",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "reasoning": "Generic gateway failure or transient network switch glitch."
+    },
+    {
+      "payment_id": "pay_syn_0068_1444",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "reasoning": "Generic gateway failure or transient network switch glitch."
+    },
+    {
+      "payment_id": "pay_syn_0043_3088",
+      "ground_truth": "insufficient_funds",
+      "predicted": "insufficient_funds",
+      "confidence": 0.93,
+      "is_correct": true,
+      "reasoning": "Account has insufficient balance/credit limit for debit."
+    },
+    {
+      "payment_id": "pay_syn_0066_7389",
+      "ground_truth": "insufficient_funds",
+      "predicted": "insufficient_funds",
+      "confidence": 0.93,
+      "is_correct": true,
+      "reasoning": "Account has insufficient balance/credit limit for debit."
+    },
+    {
+      "payment_id": "pay_syn_0004_3615",
+      "ground_truth": "insufficient_funds",
+      "predicted": "insufficient_funds",
+      "confidence": 0.93,
+      "is_correct": true,
+      "reasoning": "Account has insufficient balance/credit limit for debit."
+    },
+    {
+      "payment_id": "pay_syn_0072_4571",
+      "ground_truth": "insufficient_funds",
+      "predicted": "insufficient_funds",
+      "confidence": 0.93,
+      "is_correct": true,
+      "reasoning": "Account has insufficient balance/credit limit for debit."
+    },
+    {
+      "payment_id": "pay_syn_0005_6881",
+      "ground_truth": "expired_card",
+      "predicted": "expired_card",
+      "confidence": 0.96,
+      "is_correct": true,
+      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+    },
+    {
+      "payment_id": "pay_syn_0028_2235",
+      "ground_truth": "expired_card",
+      "predicted": "expired_card",
+      "confidence": 0.96,
+      "is_correct": true,
+      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+    },
+    {
+      "payment_id": "pay_syn_0059_3417",
+      "ground_truth": "expired_card",
+      "predicted": "expired_card",
+      "confidence": 0.96,
+      "is_correct": true,
+      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+    },
+    {
+      "payment_id": "pay_syn_0011_2084",
+      "ground_truth": "expired_card",
+      "predicted": "expired_card",
+      "confidence": 0.96,
+      "is_correct": true,
+      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+    },
+    {
+      "payment_id": "pay_syn_0010_4598",
+      "ground_truth": "fraud_suspected",
+      "predicted": "fraud_suspected",
+      "confidence": 0.95,
+      "is_correct": true,
+      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+    },
+    {
+      "payment_id": "pay_syn_0056_3780",
+      "ground_truth": "fraud_suspected",
+      "predicted": "fraud_suspected",
+      "confidence": 0.95,
+      "is_correct": true,
+      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+    },
+    {
+      "payment_id": "pay_syn_0006_7201",
+      "ground_truth": "fraud_suspected",
+      "predicted": "fraud_suspected",
+      "confidence": 0.95,
+      "is_correct": true,
+      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+    },
+    {
+      "payment_id": "pay_syn_0083_6419",
+      "ground_truth": "fraud_suspected",
+      "predicted": "fraud_suspected",
+      "confidence": 0.95,
+      "is_correct": true,
+      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+    }
+  ]
+}
