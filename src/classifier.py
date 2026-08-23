@@ -74,9 +74,17 @@ class FailureClassifier:
             if self.provider == "gemini" and self.gemini_key and not self.gemini_key.startswith("your_"):
                 import google.generativeai as genai
                 genai.configure(api_key=self.gemini_key)
-                self.client = genai.GenerativeModel("gemini-1.5-flash")
-                self.active_engine = "llm_gemini_1.5_flash"
-                logger.info("Initialized Google Gemini LLM diagnostic engine.")
+                
+                # Support available modern Gemini models
+                for model_name in ["gemini-3.6-flash", "gemini-3.7-flash", "gemini-flash-latest", "gemini-2.5-flash"]:
+                    try:
+                        self.client = genai.GenerativeModel(model_name)
+                        self.model_name = model_name
+                        self.active_engine = f"llm_{model_name.replace('-', '_').replace('.', '_')}"
+                        logger.info(f"Initialized Google Gemini LLM diagnostic engine ({model_name}).")
+                        break
+                    except Exception:
+                        continue
             elif self.provider == "anthropic" and self.anthropic_key and not self.anthropic_key.startswith("your_"):
                 import anthropic
                 self.client = anthropic.Anthropic(api_key=self.anthropic_key)
@@ -118,7 +126,11 @@ Return strict JSON classification.
                     return res
                 except Exception as e:
                     attempt += 1
-                    wait_time = 0.5 * (2 ** (attempt - 1))
+                    err_str = str(e).lower()
+                    if "429" in err_str or "quota" in err_str:
+                        wait_time = 4.0 * attempt
+                    else:
+                        wait_time = 1.0 * (2 ** (attempt - 1))
                     logger.warning(f"LLM attempt {attempt} failed: {e}. Retrying in {wait_time}s...")
                     time.sleep(wait_time)
 
