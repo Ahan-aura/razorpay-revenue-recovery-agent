@@ -1,176 +1,198 @@
 {
+  "engine_evaluated": "deterministic_keyword_baseline",
+  "evaluation_type_note": "Evaluated using Deterministic Keyword & Error-Code Baseline Classifier (Offline Fallback mode, no LLM API key loaded).",
   "sample_size": 20,
   "sample_size_note": "Evaluated on hand-labeled held-out test partition (20 rows)",
-  "accuracy_pct": 100.0,
-  "correct_count": 20,
+  "accuracy_pct": 90.0,
+  "correct_count": 18,
   "total_count": 20,
   "per_class_accuracy": {
     "bank_timeout": 100.0,
+    "expired_card": 75.0,
+    "mandate_declined": 75.0,
     "technical_error": 100.0,
-    "insufficient_funds": 100.0,
-    "expired_card": 100.0,
     "fraud_suspected": 100.0
   },
   "detailed_predictions": [
     {
-      "payment_id": "pay_syn_0001_1409",
+      "payment_id": "pay_syn_0001_5506",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
       "confidence": 0.92,
       "is_correct": true,
-      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
-      "payment_id": "pay_syn_0003_4257",
+      "payment_id": "pay_syn_0083_2625",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
       "confidence": 0.92,
       "is_correct": true,
-      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
-      "payment_id": "pay_syn_0052_6409",
+      "payment_id": "pay_syn_0077_2647",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
       "confidence": 0.92,
       "is_correct": true,
-      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
-      "payment_id": "pay_syn_0035_5272",
+      "payment_id": "pay_syn_0005_8527",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
       "confidence": 0.92,
       "is_correct": true,
-      "reasoning": "Issuer bank failed to respond within transaction timeout window."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
-      "payment_id": "pay_syn_0097_6280",
-      "ground_truth": "technical_error",
-      "predicted": "technical_error",
-      "confidence": 0.75,
-      "is_correct": true,
-      "reasoning": "Generic gateway failure or transient network switch glitch."
-    },
-    {
-      "payment_id": "pay_syn_0095_2169",
-      "ground_truth": "technical_error",
-      "predicted": "technical_error",
-      "confidence": 0.75,
-      "is_correct": true,
-      "reasoning": "Generic gateway failure or transient network switch glitch."
-    },
-    {
-      "payment_id": "pay_syn_0002_2424",
-      "ground_truth": "technical_error",
-      "predicted": "technical_error",
-      "confidence": 0.75,
-      "is_correct": true,
-      "reasoning": "Generic gateway failure or transient network switch glitch."
-    },
-    {
-      "payment_id": "pay_syn_0068_1444",
-      "ground_truth": "technical_error",
-      "predicted": "technical_error",
-      "confidence": 0.75,
-      "is_correct": true,
-      "reasoning": "Generic gateway failure or transient network switch glitch."
-    },
-    {
-      "payment_id": "pay_syn_0043_3088",
-      "ground_truth": "insufficient_funds",
-      "predicted": "insufficient_funds",
-      "confidence": 0.93,
-      "is_correct": true,
-      "reasoning": "Account has insufficient balance/credit limit for debit."
-    },
-    {
-      "payment_id": "pay_syn_0066_7389",
-      "ground_truth": "insufficient_funds",
-      "predicted": "insufficient_funds",
-      "confidence": 0.93,
-      "is_correct": true,
-      "reasoning": "Account has insufficient balance/credit limit for debit."
-    },
-    {
-      "payment_id": "pay_syn_0004_3615",
-      "ground_truth": "insufficient_funds",
-      "predicted": "insufficient_funds",
-      "confidence": 0.93,
-      "is_correct": true,
-      "reasoning": "Account has insufficient balance/credit limit for debit."
-    },
-    {
-      "payment_id": "pay_syn_0072_4571",
-      "ground_truth": "insufficient_funds",
-      "predicted": "insufficient_funds",
-      "confidence": 0.93,
-      "is_correct": true,
-      "reasoning": "Account has insufficient balance/credit limit for debit."
-    },
-    {
-      "payment_id": "pay_syn_0005_6881",
+      "payment_id": "pay_syn_0002_2535",
       "ground_truth": "expired_card",
       "predicted": "expired_card",
       "confidence": 0.96,
       "is_correct": true,
-      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54."
     },
     {
-      "payment_id": "pay_syn_0028_2235",
+      "payment_id": "pay_syn_0004_4527",
       "ground_truth": "expired_card",
       "predicted": "expired_card",
       "confidence": 0.96,
       "is_correct": true,
-      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54."
     },
     {
-      "payment_id": "pay_syn_0059_3417",
+      "payment_id": "pay_syn_0027_3697",
       "ground_truth": "expired_card",
       "predicted": "expired_card",
       "confidence": 0.96,
       "is_correct": true,
-      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54."
     },
     {
-      "payment_id": "pay_syn_0011_2084",
+      "payment_id": "pay_syn_0094_8941",
       "ground_truth": "expired_card",
-      "predicted": "expired_card",
-      "confidence": 0.96,
-      "is_correct": true,
-      "reasoning": "Card validity date lapsed or card expired indicated by gateway error code."
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": false,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
     },
     {
-      "payment_id": "pay_syn_0010_4598",
+      "payment_id": "pay_syn_0021_4750",
+      "ground_truth": "mandate_declined",
+      "predicted": "mandate_declined",
+      "confidence": 0.94,
+      "is_correct": true,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error."
+    },
+    {
+      "payment_id": "pay_syn_0075_6023",
+      "ground_truth": "mandate_declined",
+      "predicted": "mandate_declined",
+      "confidence": 0.94,
+      "is_correct": true,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error."
+    },
+    {
+      "payment_id": "pay_syn_0003_4611",
+      "ground_truth": "mandate_declined",
+      "predicted": "mandate_declined",
+      "confidence": 0.94,
+      "is_correct": true,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error."
+    },
+    {
+      "payment_id": "pay_syn_0100_7246",
+      "ground_truth": "mandate_declined",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": false,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
+    },
+    {
+      "payment_id": "pay_syn_0007_7227",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
+    },
+    {
+      "payment_id": "pay_syn_0015_9201",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
+    },
+    {
+      "payment_id": "pay_syn_0088_6280",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
+    },
+    {
+      "payment_id": "pay_syn_0046_4228",
+      "ground_truth": "technical_error",
+      "predicted": "technical_error",
+      "confidence": 0.75,
+      "is_correct": true,
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
+    },
+    {
+      "payment_id": "pay_syn_0076_4033",
       "ground_truth": "fraud_suspected",
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     },
     {
-      "payment_id": "pay_syn_0056_3780",
+      "payment_id": "pay_syn_0018_3060",
       "ground_truth": "fraud_suspected",
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     },
     {
-      "payment_id": "pay_syn_0006_7201",
+      "payment_id": "pay_syn_0051_2193",
       "ground_truth": "fraud_suspected",
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     },
     {
-      "payment_id": "pay_syn_0083_6419",
+      "payment_id": "pay_syn_0009_4598",
       "ground_truth": "fraud_suspected",
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "reasoning": "Error code and description indicate fraud detection or risk engine rejection."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     }
   ]
 }

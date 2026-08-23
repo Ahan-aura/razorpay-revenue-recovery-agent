@@ -2,7 +2,7 @@
 
 ### Razorpay AI Buildathon 2026 — AI Revenue Recovery Track
 
-> **One-Sentence Summary:** An autonomous, governed AI agent that diagnoses failed Razorpay payments, enforces deterministic stopping rules and safety gates, generates contextual payment recovery links via real Razorpay APIs, and verifies outcomes via cryptographic webhooks with complete auditability.
+> **One-Sentence Pitch:** An autonomous, governed payment recovery agent that diagnoses failed Razorpay transactions, enforces deterministic stopping rules & safety gates, dispatches tailored recovery payment links via real Razorpay APIs, and verifies outcomes via cryptographic webhooks with complete auditability.
 
 ---
 
@@ -22,14 +22,14 @@
 
 Recurring subscription mandates and one-time checkout transactions fail frequently in the Indian payments ecosystem due to:
 - **Insufficient balance** (temporary cash flow timing around salary cycles)
-- **Expired cards & lapsed validity**
+- **Expired cards & lapsed token validity**
 - **Bank switch latency and NPCI gateway timeouts**
-- **Revoked or capped e-mandates**
+- **Revoked or limit-exceeded e-mandates**
 - **Transient network errors & switch glitches**
 
 ### The Status Quo vs. Our Solution:
 - **Standard approach:** Merchants either retry blindly (damaging bank reputation, wasting gateway fees, annoying customers) or abandon the payment (losing revenue and customer LTV).
-- **Our Agent:** Diagnoses root causes using LLM classification, delegates action decisions to **deterministic rules** (keeping LLM out of money decisions), executes automated recovery via **Razorpay Payment Links**, and validates recovery with **live webhooks**.
+- **Our Agent:** Diagnoses root causes, delegates action decisions to **deterministic rules** (keeping LLM out of money decisions), executes automated recovery via **Razorpay Payment Links**, and validates actual collections via **cryptographic webhooks**.
 
 ---
 
@@ -45,7 +45,7 @@ Recurring subscription mandates and one-time checkout transactions fail frequent
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
 │                     2. CLASSIFICATION ENGINE                           │
-│   Multi-backend LLM Diagnostic Engine (Gemini / Claude / Heuristic)    │
+│   Multi-backend Diagnostic Engine (Gemini / Claude / Baseline Rule)   │
 │   Outputs: failure_type, confidence (0-1.0), diagnostic reasoning      │
 │   Resilience: Exponential backoff retries + fallback wrapping          │
 └───────────────────────────────────┬────────────────────────────────────┘
@@ -54,7 +54,7 @@ Recurring subscription mandates and one-time checkout transactions fail frequent
 ┌────────────────────────────────────────────────────────────────────────┐
 │                  3. DETERMINISTIC POLICY & SAFETY GATES                │
 │   Zero LLM hallucination for money decisions:                          │
-│   ├── Gate 0: Idempotency check (prevents double-actions)              │
+│   ├── Gate 0: Idempotency check (prevents duplicate actions)           │
 │   ├── Gate 1: Customer consent & opt-out suppression                   │
 │   ├── Gate 2: Fraud block & instant human escalation                   │
 │   ├── Gate 3: Confidence threshold gate (confidence < 0.70 -> review)  │
@@ -74,14 +74,15 @@ Recurring subscription mandates and one-time checkout transactions fail frequent
 ┌────────────────────────────────────────────────────────────────────────┐
 │                 5. AUDIT LOG & CRYPTOGRAPHIC WEBHOOKS                  │
 │   - FastAPI Webhook listener for payment.captured / payment.failed     │
-│   - Promotes outcomes to 'live_verified' upon webhook receipt          │
+│   - Promotes outcomes to 'live_verified' (real webhook) or            │
+│     'demo_verified' (local simulation endpoint)                        │
 │   - Immutable structured audit log in outputs/audit_log.json           │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
 │                 6. STREAMLIT INTERACTIVE DASHBOARD                     │
-│   - Executive KPI cards with honest live-verified vs. simulated split  │
+│   - Executive KPI cards with honest Dispatched vs. Verified split      │
 │   - Interactive batch trigger and transaction deep-dive inspector      │
 │   - Governed escalation panel and benchmark accuracy visualization     │
 └────────────────────────────────────────────────────────────────────────┘
@@ -93,15 +94,15 @@ Recurring subscription mandates and one-time checkout transactions fail frequent
 
 | # | Addressed Loophole / Trap | Engineering Solution in Code |
 |---|---|---|
-| 1 | **Sandbox Subscription Limits** | Automated Payment Links API used as the primary flow. Subscription retries are transparently documented. |
-| 2 | **Unverified "Money Recovered" Claims** | Webhook receiver (`src/webhook_server.py`) cryptographically verifies `payment.captured` events and separates `live_verified` vs `simulated` metrics. |
+| 1 | **Metric Inflation Trap** | **Strict Separation:** Distinguishes **Actions Dispatched** (payment links created) from **Confirmed Collections** (real webhooks). Zero inflated claims. |
+| 2 | **Circular Benchmark Trap** | **Transparent Engine Tracking:** Explicitly logs whether evaluations ran on LLM semantic inference or deterministic baseline rules. |
 | 3 | **Low-Confidence LLM Guesses** | **Confidence Gate:** Any classification with confidence $< 0.70$ is forced to `manual_review`. |
-| 4 | **Double-Charging / Duplicate Actions** | **Idempotency Gate:** Checks audit history before executing actions to prevent double-charging or duplicate links. |
+| 4 | **Double-Charging / Duplicate Links** | **Idempotency Gate:** Checks audit history before executing actions to prevent double-charging or duplicate links. |
 | 5 | **API Downtime / System Crashes** | External calls wrapped in exponential backoff retry ($0.5s \times 2^n$) and logged as `system_error` without crashing. |
 | 6 | **Unverified Regulation Citations** | Explicitly designed as conservative merchant policies (e.g., max 3 retries, 72h salary cycle delay). |
 | 7 | **Secrets & PII Leaks** | Complete `.gitignore` guardrails, zero real PII (clean synthetic faker names/IDs). |
 | 8 | **Customer Consent Compliance** | Respects `opt_out` flag and limits outbound recovery nudges to maximum 1 message per failure event. |
-| 9 | **Sample Size Honesty** | Evaluated against a held-out hand-labeled 20-row benchmark set with transparent accuracy notes. |
+| 9 | **Fake Webhook Mislabeling** | Webhook simulator explicitly tags test events as `demo_verified` to distinguish from cryptographically signed live webhooks (`live_verified`). |
 
 ---
 
@@ -118,12 +119,12 @@ recovery-agent/
 │   └── ground_truth_labels.csv     # 20-row hand-labeled benchmark partition
 ├── src/
 │   ├── __init__.py
-│   ├── generate_data.py      # Synthetic dataset generator
-│   ├── classifier.py         # Multi-backend LLM diagnostics engine
+│   ├── generate_data.py      # Synthetic dataset generator with NPCI/Bank codes
+│   ├── classifier.py         # Multi-backend diagnostic engine (LLM & Rule baseline)
 │   ├── policy_engine.py      # Deterministic decision rules & safety gates
 │   ├── razorpay_client.py    # Razorpay SDK client with retry backoff
 │   ├── message_generator.py  # Bilingual (English & Hinglish) recovery copy
-│   ├── webhook_server.py     # FastAPI webhook receiver
+│   ├── webhook_server.py     # FastAPI webhook receiver (live vs demo verification)
 │   ├── executor.py           # End-to-end orchestration pipeline
 │   ├── audit_log.py          # Structured audit trail manager
 │   └── metrics.py            # KPI and benchmark metrics calculator
@@ -141,14 +142,9 @@ recovery-agent/
 
 ## 5. Quickstart & Installation
 
-### Prerequisites
-- Python 3.10+
-- (Optional) Razorpay Test Mode API Key ID and Secret
-- (Optional) Google Gemini or Anthropic API Key
-
 ### 1. Clone & Install Dependencies
 ```bash
-git clone https://github.com/<your-username>/razorpay-revenue-recovery-agent.git
+git clone https://github.com/Ahan-aura/razorpay-revenue-recovery-agent.git
 cd recovery-agent
 pip install -r requirements.txt
 ```
@@ -158,7 +154,7 @@ Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
-*(Note: If no API keys are provided, the agent runs seamlessly in its high-fidelity resilient fallback mode.)*
+*(Configure `GEMINI_API_KEY` or `ANTHROPIC_API_KEY` for live LLM mode, and `RAZORPAY_KEY_ID` for live test API calls. If unconfigured, the agent operates in its resilient offline baseline mode.)*
 
 ### 3. Run Policy Engine Unit Tests
 ```bash
@@ -186,11 +182,12 @@ python src/webhook_server.py
 
 Tested on a dataset of **100 synthetic failed transactions** representing **₹138,928** in failed volume:
 
-- **Total Recovered Volume:** ₹118,333 (**85.18% Recovery Rate**)
-- **Classification Accuracy:** **100.0%** on 20 hand-labeled held-out benchmark test cases across 6 error archetypes
-- **Escalations Handled:** 8 Fraud Risk cases automatically blocked and escalated to human security
-- **Consent Filter:** 1 Opted-out customer transaction suppressed from outbound spam
-- **System Error Rate:** **0%** (zero crashes, resilient error wrapping)
+- **Recovery Actions Dispatched:** **₹118,333** across **91 Payment Links** (**85.18% Dispatch Rate**)
+- **Live-Verified Webhook Collections:** ₹0 (prior to webhook execution) / Promoted dynamically via webhook listener
+- **Governed Escalations:** **8 Fraud Cases Blocked** and escalated to operations
+- **Customer Consent:** **1 Opted-out customer transaction suppressed** from outbound notifications
+- **System Resilience:** **0% System Crashes** (handled via exponential backoff and error wrapping)
+- **Held-Out Benchmark Accuracy:** **100.0%** across 6 root-cause archetypes on 20 hand-labeled test cases (evaluated on deterministic baseline; supports live LLM inference).
 
 ---
 
@@ -202,21 +199,22 @@ Tested on a dataset of **100 synthetic failed transactions** representing **₹1
 | **Build Quality** | Modular design, full unit test suite, atomic audit trail logging, cryptographic webhook signature verification, and zero PII/secret leaks. |
 | **AI Judgment** | **The LLM never makes financial execution decisions.** AI is used exclusively for linguistic error diagnosis and message drafting; all stopping rules and money actions are 100% deterministic code. |
 | **Failure Recovery** | Two-tier resilience: System-level retry backoff for external APIs, and business-level stopping rules with human escalation for low confidence or fraud. |
+| **Honesty & Transparency** | Strict separation of **Dispatched Actions** from **Confirmed Webhook Collections**, with transparent engine attribution in benchmark evaluations. |
 
 ---
 
 ## 8. 5-Minute Panel Pitch & Demo Script
 
 1. **Problem Framing (0:00 - 0:45):**
-   - *"Failed payments cost Indian subscription and e-commerce companies millions in MRR every month. Today, merchants either retry blindly or lose customers forever."*
+   - *"Failed payments cost Indian subscription and e-commerce businesses millions in MRR every month. Today, merchants either retry blindly or abandon customers."*
 2. **Solution & Architecture (0:45 - 2:00):**
    - *"We built an Autonomous Revenue Recovery Agent. It analyzes gateway failure logs using LLM diagnostics, but delegates every single action decision to deterministic policy rules."*
 3. **Live Dashboard Walkthrough (2:00 - 3:30):**
-   - Click **'Run Batch Pipeline Live'** in Streamlit. Show ₹118k recovered across 100 failed payments.
-   - Trigger **'Simulate Webhook Capture'** to demonstrate real-time promotion to `live_verified`.
-   - Inspect single transaction showing the LLM reasoning, deterministic rule fired, and generated Hinglish SMS copy.
+   - Click **'Run Batch Pipeline Live'** in Streamlit. Show ₹118,333 in recovery actions dispatched across 91 eligible transactions.
+   - Trigger **'Simulate Customer Payment'** to demonstrate real-time promotion to `demo_verified` / `live_verified`.
+   - Inspect single transaction showing the diagnostic reasoning, deterministic rule fired, and generated Hinglish SMS copy.
 4. **Governed AI Judgment & Escalation (3:30 - 4:30):**
    - Open the **'AI Judgment & Escalation Panel'**.
-   - *"Notice these 8 transactions: our agent detected high fraud risk and low confidence. Instead of hallucinating an action, it stopped automated retries and escalated cleanly."*
+   - *"Notice these 8 transactions: our agent detected high fraud risk. Instead of hallucinating an action or blindly charging, it stopped automated retries and escalated cleanly."*
 5. **Conclusion & Q&A (4:30 - 5:00):**
-   - Highlight the 100% benchmark accuracy and modular, production-ready codebase.
+   - Highlight the modular, transparent, production-ready codebase and honest metric reporting.

@@ -1,7 +1,7 @@
 """
 Metrics and Performance Evaluation Layer
-Computes revenue recovery rates, classification accuracy on benchmark data,
-and honest breakdown of live-verified vs. simulated outcomes.
+Computes revenue recovery rates, actions dispatched, and maintains strict separation
+between Dispatched Recovery Actions, Live-Verified Webhooks, and Demo Simulations.
 """
 
 import os
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class MetricsCalculator:
     """
-    Analyzes audit logs and benchmark datasets to compute key performance indicators.
+    Analyzes audit logs and benchmark datasets to compute transparent KPIs.
     """
 
     def __init__(self, outputs_dir: Optional[str] = None, data_dir: Optional[str] = None):
@@ -26,35 +26,57 @@ class MetricsCalculator:
 
     def compute_metrics(self, audit_records: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
-        Calculates comprehensive summary metrics from audit log entries.
+        Calculates comprehensive, transparent summary metrics from audit log entries.
+        Never conflates 'payment link created' with 'cash collected'.
         """
         if not audit_records:
             return {
                 "total_records": 0,
                 "total_failed_volume_inr": 0,
-                "total_recovered_volume_inr": 0,
-                "overall_recovery_rate_pct": 0.0,
-                "live_verified": {"count": 0, "amount_inr": 0},
-                "simulated_recovery": {"count": 0, "amount_inr": 0},
-                "escalations": {"total": 0, "fraud": 0, "low_confidence": 0, "max_retries": 0},
-                "opt_out_suppressed": 0,
-                "system_errors": 0,
+                "actions_dispatched": {"count": 0, "amount_inr": 0, "dispatch_rate_pct": 0.0},
+                "live_verified_recoveries": {"count": 0, "amount_inr": 0, "recovery_rate_pct": 0.0},
+                "demo_verified_recoveries": {"count": 0, "amount_inr": 0},
+                "unconfirmed_dispatched_links": {"count": 0, "amount_inr": 0},
+                "escalations": {"total": 0, "fraud_blocked": 0, "low_confidence_review": 0, "max_retries_exceeded": 0},
+                "opt_out_suppressed_count": 0,
+                "system_errors_count": 0,
                 "breakdown_by_failure_type": {}
             }
 
         total_records = len(audit_records)
         total_failed_volume = sum(r.get("amount", 0) for r in audit_records)
 
-        live_verified_records = [r for r in audit_records if r.get("verification") == "live_verified" and r.get("outcome") == "recovered"]
+        # 1. Actions Dispatched (Payment links created / scheduled retries)
+        dispatched_records = [
+            r for r in audit_records
+            if r.get("outcome") in ["action_dispatched", "recovered"]
+        ]
+        dispatched_amount = sum(r.get("amount", 0) for r in dispatched_records)
+        dispatch_rate_pct = (dispatched_amount / total_failed_volume * 100) if total_failed_volume > 0 else 0.0
+
+        # 2. Live-Verified Recoveries (Cryptographically confirmed via real Razorpay Webhook)
+        live_verified_records = [
+            r for r in audit_records
+            if r.get("verification") == "live_verified" and r.get("outcome") == "recovered"
+        ]
         live_verified_amount = sum(r.get("amount", 0) for r in live_verified_records)
+        live_recovery_rate_pct = (live_verified_amount / total_failed_volume * 100) if total_failed_volume > 0 else 0.0
 
-        simulated_records = [r for r in audit_records if r.get("outcome") in ["action_dispatched", "recovered"] and r.get("verification") == "simulated"]
-        simulated_amount = sum(r.get("amount", 0) for r in simulated_records)
+        # 3. Demo-Verified Recoveries (Confirmed via /simulate-webhook demo endpoint)
+        demo_verified_records = [
+            r for r in audit_records
+            if r.get("verification") == "demo_verified" and r.get("outcome") == "recovered"
+        ]
+        demo_verified_amount = sum(r.get("amount", 0) for r in demo_verified_records)
 
-        total_recovered_volume = live_verified_amount + simulated_amount
-        recovery_rate_pct = (total_recovered_volume / total_failed_volume * 100) if total_failed_volume > 0 else 0.0
+        # 4. Dispatched Links Awaiting Webhook Confirmation
+        pending_records = [
+            r for r in audit_records
+            if r.get("outcome") == "action_dispatched" and r.get("verification") in ["simulated", "dispatched_pending"]
+        ]
+        pending_amount = sum(r.get("amount", 0) for r in pending_records)
 
-        # Escalations breakdown
+        # 5. Escalations & Guardrails
         fraud_escalations = [r for r in audit_records if r.get("rule_fired") == "RULE_2_FRAUD_BLOCK"]
         low_confidence_escalations = [r for r in audit_records if r.get("rule_fired") == "RULE_3_LOW_CONFIDENCE_GATE"]
         max_retries_escalations = [r for r in audit_records if r.get("rule_fired") == "RULE_4_MAX_RETRIES"]
@@ -73,22 +95,38 @@ class MetricsCalculator:
         summary = {
             "total_records": total_records,
             "total_failed_volume_inr": round(total_failed_volume, 2),
-            "total_recovered_volume_inr": round(total_recovered_volume, 2),
-            "overall_recovery_rate_pct": round(recovery_rate_pct, 2),
             
-            # Honest Split (Loophole 2 fix)
-            "live_verified": {
+            # Action Pipeline Metric
+            "actions_dispatched": {
+                "count": len(dispatched_records),
+                "amount_inr": round(dispatched_amount, 2),
+                "dispatch_rate_pct": round(dispatch_rate_pct, 2),
+                "description": "Total payment links generated and recovery workflows dispatched"
+            },
+            
+            # Real Verified Metric (Razorpay Webhook)
+            "live_verified_recoveries": {
                 "count": len(live_verified_records),
                 "amount_inr": round(live_verified_amount, 2),
-                "percentage_of_total": round((live_verified_amount / total_failed_volume * 100) if total_failed_volume else 0, 2)
+                "recovery_rate_pct": round(live_recovery_rate_pct, 2),
+                "description": "Actual rupees confirmed collected via cryptographic HMAC-SHA256 Razorpay webhook"
             },
-            "simulated_recovery": {
-                "count": len(simulated_records),
-                "amount_inr": round(simulated_amount, 2),
-                "percentage_of_total": round((simulated_amount / total_failed_volume * 100) if total_failed_volume else 0, 2)
+
+            # Demo Verified Metric (Local Simulation)
+            "demo_verified_recoveries": {
+                "count": len(demo_verified_records),
+                "amount_inr": round(demo_verified_amount, 2),
+                "description": "Transactions verified via local demo webhook trigger"
             },
-            
-            # Governance & Safety Gate Metrics
+
+            # Unconfirmed / Pending Customer Checkout
+            "unconfirmed_dispatched_links": {
+                "count": len(pending_records),
+                "amount_inr": round(pending_amount, 2),
+                "description": "Dispatched recovery links awaiting customer payment completion"
+            },
+
+            # Governance & Escalations
             "escalations": {
                 "total": len(fraud_escalations) + len(low_confidence_escalations) + len(max_retries_escalations),
                 "fraud_blocked": len(fraud_escalations),
@@ -100,7 +138,6 @@ class MetricsCalculator:
             "breakdown_by_failure_type": type_breakdown
         }
 
-        # Save to outputs
         os.makedirs(self.outputs_dir, exist_ok=True)
         with open(self.metrics_file_path, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2)
@@ -110,7 +147,7 @@ class MetricsCalculator:
     def evaluate_benchmark_accuracy(self, classifier) -> Dict[str, Any]:
         """
         Evaluates classifier performance against the 20-row hand-labeled benchmark set.
-        Returns accuracy, sample size disclaimer, and per-class breakdown.
+        Explicitly reports the engine used (LLM vs Deterministic Fallback) to prevent circular grading claims.
         """
         benchmark_path = os.path.join(self.data_dir, "ground_truth_labels.csv")
         if not os.path.exists(benchmark_path):
@@ -123,16 +160,18 @@ class MetricsCalculator:
         predictions_log = []
 
         class_stats = {}
+        engine_used_log = set()
 
         for _, row in df.iterrows():
             event = row.to_dict()
             ground_truth = event.get("ground_truth_category")
             
-            # Predict using classifier
             pred = classifier.classify_failure(event)
             predicted_type = pred.get("failure_type")
-            is_correct = (predicted_type == ground_truth)
+            engine_name = pred.get("engine_used", "unknown")
+            engine_used_log.add(engine_name)
             
+            is_correct = (predicted_type == ground_truth)
             if is_correct:
                 correct_predictions += 1
 
@@ -148,12 +187,21 @@ class MetricsCalculator:
                 "predicted": predicted_type,
                 "confidence": pred.get("confidence"),
                 "is_correct": is_correct,
+                "engine_used": engine_name,
                 "reasoning": pred.get("reasoning")
             })
 
         accuracy_pct = (correct_predictions / total_samples * 100) if total_samples > 0 else 0.0
+        primary_engine = list(engine_used_log)[0] if len(engine_used_log) == 1 else "mixed"
+
+        if "baseline" in primary_engine:
+            evaluation_type_note = "Evaluated using Deterministic Keyword & Error-Code Baseline Classifier (Offline Fallback mode, no LLM API key loaded)."
+        else:
+            evaluation_type_note = f"Evaluated using Live Semantic LLM Inferences ({primary_engine})."
 
         benchmark_results = {
+            "engine_evaluated": primary_engine,
+            "evaluation_type_note": evaluation_type_note,
             "sample_size": total_samples,
             "sample_size_note": "Evaluated on hand-labeled held-out test partition (20 rows)",
             "accuracy_pct": round(accuracy_pct, 2),
@@ -165,7 +213,6 @@ class MetricsCalculator:
             "detailed_predictions": predictions_log
         }
 
-        # Save benchmark evaluation summary
         bench_out_path = os.path.join(self.outputs_dir, "benchmark_evaluation.json")
         with open(bench_out_path, "w", encoding="utf-8") as f:
             json.dump(benchmark_results, f, indent=2)

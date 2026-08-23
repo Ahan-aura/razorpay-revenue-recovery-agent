@@ -4,7 +4,8 @@ Captures real Razorpay Webhook events (e.g. payment.captured, payment.failed, pa
 Verifies cryptographic webhook signatures (HMAC-SHA256) and promotes recovery actions
 from 'dispatched' to 'live_verified'.
 
-Includes a `/simulate-webhook` endpoint for friction-free local live testing and demos.
+Includes a `/simulate-webhook` endpoint for friction-free local demos,
+explicitly tagging its outcomes as 'demo_verified' (never confusing fake calls with live signatures).
 """
 
 import os
@@ -30,21 +31,23 @@ app = FastAPI(
 )
 
 WEBHOOK_SECRET = os.getenv("RAZORPAY_WEBHOOK_SECRET", "")
-WEBHOOK_LOG_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "outputs", "webhook_events.json")
-AUDIT_LOG_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "outputs", "audit_log.json")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+WEBHOOK_LOG_FILE = os.path.join(BASE_DIR, "outputs", "webhook_events.json")
+AUDIT_LOG_FILE = os.path.join(BASE_DIR, "outputs", "audit_log.json")
 
 
 def verify_razorpay_signature(raw_body: bytes, signature: str, secret: str) -> bool:
     """Verifies HMAC SHA256 webhook signature from Razorpay."""
     if not secret:
-        return True  # If no secret is configured in dev/sandbox, skip validation
+        return True
     expected_sig = hmac.new(secret.encode("utf-8"), raw_body, hashlib.sha256).hexdigest()
     return hmac.compare_digest(expected_sig, signature)
 
 
-def update_audit_log_with_webhook(event_data: Dict[str, Any]):
+def update_audit_log_with_webhook(event_data: Dict[str, Any], verification_tag: str = "live_verified"):
     """
-    Updates corresponding payment entry in audit_log.json to 'live_verified'.
+    Updates corresponding payment entry in audit_log.json with explicit verification tag
+    ('live_verified' for real signed webhooks, 'demo_verified' for test simulator calls).
     """
     try:
         os.makedirs(os.path.dirname(AUDIT_LOG_FILE), exist_ok=True)
@@ -63,18 +66,16 @@ def update_audit_log_with_webhook(event_data: Dict[str, Any]):
 
         updated = False
         for record in audit_records:
-            # Match by original payment id or payment link id
             if (original_payment_id and record.get("payment_id") == original_payment_id) or \
                (payment_link_id and record.get("action_details", {}).get("payment_link_id") == payment_link_id):
                 
                 if event_name in ["payment.captured", "order.paid", "payment_link.paid"]:
                     record["outcome"] = "recovered"
-                    record["verification"] = "live_verified"
+                    record["verification"] = verification_tag
                     record["webhook_captured_at"] = datetime.now().isoformat()
-                    record["recovered_amount"] = record.get("amount", 0)
                 elif event_name in ["payment.failed"]:
                     record["outcome"] = "retry_failed"
-                    record["verification"] = "live_verified"
+                    record["verification"] = verification_tag
                     record["webhook_captured_at"] = datetime.now().isoformat()
                 
                 updated = True
@@ -83,13 +84,13 @@ def update_audit_log_with_webhook(event_data: Dict[str, Any]):
         if updated:
             with open(AUDIT_LOG_FILE, "w", encoding="utf-8") as f:
                 json.dump(audit_records, f, indent=2)
-            logger.info(f"Audit log updated to live_verified for payment: {original_payment_id or payment_link_id}")
+            logger.info(f"Audit log updated to {verification_tag} for payment: {original_payment_id or payment_link_id}")
 
     except Exception as e:
         logger.error(f"Failed to update audit log from webhook: {e}")
 
 
-def persist_webhook_event(event_data: Dict[str, Any]):
+def persist_webhook_event(event_data: Dict[str, Any], source: str = "live_razorpay_webhook"):
     """Appends incoming webhook event to persistent JSON store."""
     try:
         os.makedirs(os.path.dirname(WEBHOOK_LOG_FILE), exist_ok=True)
@@ -103,6 +104,7 @@ def persist_webhook_event(event_data: Dict[str, Any]):
         
         events.append({
             "received_at": datetime.now().isoformat(),
+            "source": source,
             "event": event_data.get("event"),
             "data": event_data
         })
@@ -126,6 +128,7 @@ async def handle_razorpay_webhook(
 ):
     """
     Primary endpoint for real Razorpay webhook notifications.
+    Promotes records to 'live_verified'.
     """
     raw_body = await request.body()
 
@@ -138,11 +141,10 @@ async def handle_razorpay_webhook(
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Malformed JSON payload: {e}")
 
-    # Process in background tasks to immediately return 200 OK to Razorpay
-    background_tasks.add_task(persist_webhook_event, event_data)
-    background_tasks.add_task(update_audit_log_with_webhook, event_data)
+    background_tasks.add_task(persist_webhook_event, event_data, "live_razorpay_webhook")
+    background_tasks.add_task(update_audit_log_with_webhook, event_data, "live_verified")
 
-    return JSONResponse(status_code=200, content={"status": "accepted", "event": event_data.get("event")})
+    return JSONResponse(status_code=200, content={"status": "accepted", "event": event_data.get("event"), "verification": "live_verified"})
 
 
 @app.post("/simulate-webhook")
@@ -152,7 +154,8 @@ async def simulate_webhook(
     amount_inr: float = 999.0
 ):
     """
-    Simulates a live webhook call for local demonstrations or test verification.
+    Simulates a webhook call for local demonstrations.
+    Explicitly tags the outcome as 'demo_verified' so it is never confused with a live HMAC signature.
     """
     simulated_payload = {
         "entity": "event",
@@ -162,7 +165,7 @@ async def simulate_webhook(
         "payload": {
             "payment": {
                 "entity": {
-                    "id": f"pay_live_{payment_id.replace('pay_', '')}",
+                    "id": f"pay_demo_{payment_id.replace('pay_', '')}",
                     "amount": int(amount_inr * 100),
                     "currency": "INR",
                     "status": "captured" if event == "payment.captured" else "failed",
@@ -175,15 +178,16 @@ async def simulate_webhook(
         "created_at": int(datetime.now().timestamp())
     }
 
-    persist_webhook_event(simulated_payload)
-    update_audit_log_with_webhook(simulated_payload)
+    persist_webhook_event(simulated_payload, "demo_simulated_webhook")
+    update_audit_log_with_webhook(simulated_payload, "demo_verified")
 
     return {
-        "status": "simulated_success",
+        "status": "demo_simulated_success",
         "event": event,
         "payment_id": payment_id,
         "amount": amount_inr,
-        "note": "Payment promoted to live_verified in audit log."
+        "verification_tag": "demo_verified",
+        "note": "Payment promoted to demo_verified in audit log."
     }
 
 

@@ -1,7 +1,7 @@
 """
 End-to-End Orchestration Pipeline for Failed Payment Recovery Agent
-Orchestrates data ingestion, LLM classification, policy gating, Razorpay actions,
-audit logging, and metric computation.
+Orchestrates data ingestion, diagnostics, policy gating, Razorpay actions,
+audit logging, and transparent metric computation.
 """
 
 import os
@@ -23,7 +23,6 @@ from src.message_generator import MessageGenerator
 from src.audit_log import AuditLogger
 from src.metrics import MetricsCalculator
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
@@ -61,7 +60,7 @@ class RecoveryAgentPipeline:
         payment_id = payment_event.get("payment_id")
         audit_history = self.audit_logger.load_all_records()
 
-        # Step 1: LLM Classification
+        # Step 1: Diagnostic Classification
         classification = self.classifier.classify_failure(payment_event)
 
         # Step 2: Policy & Safety Gate Evaluation
@@ -73,12 +72,11 @@ class RecoveryAgentPipeline:
 
         execution_result = None
         messaging_result = None
-        verification = "simulated"
+        verification = "dispatched_pending"
         outcome = None
 
         # Step 3: Action Execution (if allowed by policy)
         if policy_decision.should_execute_api:
-            # Action: Create Payment Link or Subscription simulation
             if policy_decision.action in ["create_payment_link", "retry_payment_link", "schedule_delayed_retry"]:
                 execution_result = self.razorpay_client.create_recovery_payment_link(
                     amount_inr=float(payment_event.get("amount", 0)),
@@ -104,7 +102,7 @@ class RecoveryAgentPipeline:
                     outcome = "system_error"
                 else:
                     outcome = "action_dispatched"
-                    verification = "live_verified" if execution_result.get("mode") == "live_api" else "simulated"
+                    verification = "dispatched_pending"
 
         # Step 5: Log structured audit trail entry
         audit_entry = self.audit_logger.record_action(
@@ -144,7 +142,7 @@ class RecoveryAgentPipeline:
             if idx % 20 == 0 or idx == len(records):
                 logger.info(f"Processed {idx}/{len(records)} payments...")
 
-        # Step 6: Compute performance metrics
+        # Step 6: Compute transparent metrics
         all_audit_logs = self.audit_logger.load_all_records()
         metrics = self.metrics_calculator.compute_metrics(all_audit_logs)
 
@@ -175,20 +173,28 @@ def main():
     )
 
     print("\n========================================================")
-    print("      RAZORPAY RECOVERY AGENT — BATCH SUMMARY")
+    print("      RAZORPAY RECOVERY AGENT — TRANSPARENT SUMMARY")
     print("========================================================")
     m = results["metrics"]
-    print(f"Total Failed Volume:      Rs. {m['total_failed_volume_inr']:,.2f} ({m['total_records']} payments)")
-    print(f"Total Recovered Volume:   Rs. {m['total_recovered_volume_inr']:,.2f}")
-    print(f"Overall Recovery Rate:    {m['overall_recovery_rate_pct']}%")
-    print(f" -> Live-Verified:        Rs. {m['live_verified']['amount_inr']:,.2f} ({m['live_verified']['count']} payments)")
-    print(f" -> Simulated Recovery:   Rs. {m['simulated_recovery']['amount_inr']:,.2f} ({m['simulated_recovery']['count']} payments)")
-    print(f"Total Escalated Cases:    {m['escalations']['total']} (Fraud: {m['escalations']['fraud_blocked']}, Low Conf: {m['escalations']['low_confidence_review']}, Max Retries: {m['escalations']['max_retries_exceeded']})")
-    print(f"Opt-Out Suppressed:       {m['opt_out_suppressed_count']}")
-    print(f"System Errors / Crashes:  {m['system_errors_count']}")
+    ad = m.get("actions_dispatched", {})
+    lv = m.get("live_verified_recoveries", {})
+    dv = m.get("demo_verified_recoveries", {})
+    esc = m.get("escalations", {})
+
+    print(f"Total Failed Volume:          Rs. {m['total_failed_volume_inr']:,.2f} ({m['total_records']} payments)")
+    print(f"Actions Dispatched:           Rs. {ad.get('amount_inr', 0):,.2f} ({ad.get('count', 0)} links created, {ad.get('dispatch_rate_pct', 0)}% dispatch rate)")
+    print(f" -> Live-Verified (Webhook):  Rs. {lv.get('amount_inr', 0):,.2f} ({lv.get('count', 0)} real webhooks verified)")
+    print(f" -> Demo-Verified:            Rs. {dv.get('amount_inr', 0):,.2f} ({dv.get('count', 0)} demo simulations)")
+    print(f" -> Pending Checkout:         Rs. {m.get('unconfirmed_dispatched_links', {}).get('amount_inr', 0):,.2f} ({m.get('unconfirmed_dispatched_links', {}).get('count', 0)} links awaiting customer payment)")
+    print(f"Governed Escalations:         {esc.get('total', 0)} (Fraud: {esc.get('fraud_blocked', 0)}, Low Conf: {esc.get('low_confidence_review', 0)}, Max Retries: {esc.get('max_retries_exceeded', 0)})")
+    print(f"Opt-Out Suppressed:           {m['opt_out_suppressed_count']}")
+    print(f"System Errors / Crashes:      {m['system_errors_count']}")
     
     b = results["benchmark_accuracy"]
-    print(f"\nClassification Accuracy on Benchmark: {b.get('accuracy_pct', 0)}% (Sample: {b.get('sample_size')} hand-labeled rows)")
+    print(f"\nBenchmark Evaluation:")
+    print(f" -> Engine:                   {b.get('engine_evaluated')}")
+    print(f" -> Accuracy:                 {b.get('accuracy_pct', 0)}% on {b.get('sample_size')} hand-labeled test cases")
+    print(f" -> Evaluation Note:          {b.get('evaluation_type_note')}")
     print("========================================================\n")
 
 

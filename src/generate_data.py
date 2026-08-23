@@ -1,63 +1,152 @@
 """
 Synthetic Data Generator for Razorpay Failed Payment Recovery Agent
-Generates realistic failed payment datasets for testing and benchmarking.
-Ensures zero real PII is used, complying with privacy and security guardrails.
+Generates realistic failed payment datasets with rich Indian banking context,
+NPCI response codes, switch error codes, and varied natural error descriptions.
+Zero real PII used (clean synthetic data).
 """
 
 import os
-import json
 import random
 import pandas as pd
 from datetime import datetime, timedelta
 
-# Standard failure archetypes mapped to realistic Razorpay & Banking error codes
+# Rich archetypes with varied realistic Indian banking / NPCI error messages
 FAILURE_ARCHETYPES = [
     {
         "true_category": "insufficient_funds",
-        "failure_code": "BAD_REQUEST_ERROR",
-        "error_reason": "payment_failed",
-        "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit.",
-        "payment_type_distribution": ["subscription", "one_time"],
+        "templates": [
+            {
+                "failure_code": "BAD_REQUEST_ERROR",
+                "error_reason": "payment_failed",
+                "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit."
+            },
+            {
+                "failure_code": "NPCI_RESP_114",
+                "error_reason": "account_balance_low",
+                "error_description": "NPCI Debit decline: Available balance below requested transaction amount."
+            },
+            {
+                "failure_code": "BANK_DEBIT_DECLINE_51",
+                "error_reason": "insufficient_credit_limit",
+                "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account."
+            },
+            {
+                "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+                "error_reason": "account_balance_unmet",
+                "error_description": "Customer debit account lacked minimum clearing balance at scheduled time."
+            }
+        ],
+        "payment_types": ["subscription", "one_time"],
         "weight": 0.30
     },
     {
         "true_category": "expired_card",
-        "failure_code": "CARD_EXPIRED_ERROR",
-        "error_reason": "card_expired",
-        "error_description": "Card validity date has lapsed or card has been deactivated by the cardholder bank.",
-        "payment_type_distribution": ["subscription", "one_time"],
+        "templates": [
+            {
+                "failure_code": "CARD_EXPIRED_ERROR",
+                "error_reason": "card_expired",
+                "error_description": "Card validity date has lapsed or card has been deactivated by the cardholder bank."
+            },
+            {
+                "failure_code": "ISO_8583_DECLINE_54",
+                "error_reason": "expired_card_token",
+                "error_description": "Card tokenization expired. Issuer rejected debit due to card expiry MM/YY."
+            },
+            {
+                "failure_code": "GATEWAY_CARD_INVALID",
+                "error_reason": "card_validity_lapsed",
+                "error_description": "Payment instrument invalid: Card valid-thru date has passed."
+            }
+        ],
+        "payment_types": ["subscription", "one_time"],
         "weight": 0.18
     },
     {
         "true_category": "bank_timeout",
-        "failure_code": "GATEWAY_ERROR",
-        "error_reason": "bank_timeout",
-        "error_description": "Issuer bank payment gateway did not respond within the 45-second timeout window.",
-        "payment_type_distribution": ["subscription", "one_time"],
+        "templates": [
+            {
+                "failure_code": "GATEWAY_ERROR",
+                "error_reason": "bank_timeout",
+                "error_description": "Issuer bank payment gateway did not respond within the 45-second timeout window."
+            },
+            {
+                "failure_code": "NPCI_TIMEOUT_96",
+                "error_reason": "npci_switch_unresponsive",
+                "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank."
+            },
+            {
+                "failure_code": "HTTP_GATEWAY_TIMEOUT_504",
+                "error_reason": "switch_latency_breached",
+                "error_description": "Core banking system (CBS) response deadline exceeded during debit authentication."
+            }
+        ],
+        "payment_types": ["subscription", "one_time"],
         "weight": 0.20
     },
     {
         "true_category": "mandate_declined",
-        "failure_code": "MANDATE_DEBIT_DECLINED",
-        "error_reason": "mandate_revoked_or_limit_exceeded",
-        "error_description": "Recurring e-mandate declined by destination bank: Mandate limit exceeded or mandate inactive.",
-        "payment_type_distribution": ["subscription"],
+        "templates": [
+            {
+                "failure_code": "MANDATE_DEBIT_DECLINED",
+                "error_reason": "mandate_revoked_or_limit_exceeded",
+                "error_description": "Recurring e-mandate declined by destination bank: Mandate limit exceeded or mandate inactive."
+            },
+            {
+                "failure_code": "NPCI_UPI_MANDATE_U69",
+                "error_reason": "mandate_paused_by_user",
+                "error_description": "UPI Autopay mandate execution failed: Mandate paused or revoked by user in PSP app."
+            },
+            {
+                "failure_code": "ENACH_DECLINE_U30",
+                "error_reason": "standing_instruction_invalid",
+                "error_description": "eNACH standing instruction rejected: Max per-transaction debit limit exceeded."
+            }
+        ],
+        "payment_types": ["subscription"],
         "weight": 0.14
     },
     {
         "true_category": "technical_error",
-        "failure_code": "INTERNAL_SERVER_ERROR",
-        "error_reason": "switch_network_failure",
-        "error_description": "Network switch connection reset during authentication handshake. Ephemeral gateway glitch.",
-        "payment_type_distribution": ["subscription", "one_time"],
+        "templates": [
+            {
+                "failure_code": "INTERNAL_SERVER_ERROR",
+                "error_reason": "switch_network_failure",
+                "error_description": "Network switch connection reset during authentication handshake. Ephemeral gateway glitch."
+            },
+            {
+                "failure_code": "BANK_SWITCH_91",
+                "error_reason": "issuer_switch_inoperative",
+                "error_description": "Issuer bank system down/inoperative during processing window."
+            },
+            {
+                "failure_code": "TLS_HANDSHAKE_RESET",
+                "error_reason": "socket_connection_closed",
+                "error_description": "TCP connection reset by peer during 3DS challenge redirection."
+            }
+        ],
+        "payment_types": ["subscription", "one_time"],
         "weight": 0.12
     },
     {
         "true_category": "fraud_suspected",
-        "failure_code": "RISK_ENGINE_REJECTED",
-        "error_reason": "high_risk_flagged",
-        "error_description": "Transaction rejected by fraud detection engine: suspicious IP velocity and unusual payment pattern.",
-        "payment_type_distribution": ["one_time"],
+        "templates": [
+            {
+                "failure_code": "RISK_ENGINE_REJECTED",
+                "error_reason": "high_risk_flagged",
+                "error_description": "Transaction rejected by fraud detection engine: suspicious IP velocity and unusual payment pattern."
+            },
+            {
+                "failure_code": "NPCI_SECURITY_DECLINE_U16",
+                "error_reason": "risk_threshold_breach",
+                "error_description": "Risk engine block: Rapid repeated checkout attempts from anomalous geographic location."
+            },
+            {
+                "failure_code": "GATEWAY_FRAUD_BLOCK_59",
+                "error_reason": "suspected_carding_attack",
+                "error_description": "Security perimeter triggered: Velocity threshold breached on merchant endpoint."
+            }
+        ],
+        "payment_types": ["one_time"],
         "weight": 0.06
     }
 ]
@@ -85,11 +174,10 @@ def generate_synthetic_dataset(num_records: int = 100, seed: int = 42) -> pd.Dat
     weights = [arch["weight"] for arch in FAILURE_ARCHETYPES]
 
     for i in range(1, num_records + 1):
-        # Select archetype based on probability weights
         selected_category = random.choices(categories, weights=weights, k=1)[0]
         archetype = next(item for item in FAILURE_ARCHETYPES if item["true_category"] == selected_category)
+        template = random.choice(archetype["templates"])
 
-        # Generate unique IDs
         payment_id = f"pay_syn_{i:04d}_{random.randint(1000, 9999)}"
         customer_id = f"CUST_{i:04d}"
         
@@ -99,9 +187,8 @@ def generate_synthetic_dataset(num_records: int = 100, seed: int = 42) -> pd.Dat
         customer_email = f"cust_{i:04d}@example.com"
         customer_contact = f"+9198{random.randint(10000000, 99999999)}"
 
-        # Realistic Indian subscription / transaction amounts in INR
-        if selected_category == "mandate_declined" or "subscription" in archetype["payment_type_distribution"]:
-            payment_type = random.choice(archetype["payment_type_distribution"])
+        if selected_category == "mandate_declined" or "subscription" in archetype["payment_types"]:
+            payment_type = random.choice(archetype["payment_types"])
         else:
             payment_type = "one_time"
 
@@ -110,11 +197,8 @@ def generate_synthetic_dataset(num_records: int = 100, seed: int = 42) -> pd.Dat
         else:
             amount = random.choice([150, 350, 750, 1200, 2500, 3499, 4999])
 
-        # Random timestamp over the last 48 hours
         offset_minutes = random.randint(0, 48 * 60)
         timestamp = (base_time + timedelta(minutes=offset_minutes)).isoformat()
-
-        # 5% chance of customer opt-out to test consent guardrails
         opt_out = random.random() < 0.05
 
         records.append({
@@ -125,9 +209,9 @@ def generate_synthetic_dataset(num_records: int = 100, seed: int = 42) -> pd.Dat
             "customer_contact": customer_contact,
             "amount": amount,
             "currency": "INR",
-            "failure_code": archetype["failure_code"],
-            "error_reason": archetype["error_reason"],
-            "error_description": archetype["error_description"],
+            "failure_code": template["failure_code"],
+            "error_reason": template["error_reason"],
+            "error_description": template["error_description"],
             "payment_type": payment_type,
             "timestamp": timestamp,
             "retry_count": 0,
@@ -145,13 +229,11 @@ def save_datasets(data_dir: str):
     os.makedirs(data_dir, exist_ok=True)
     df = generate_synthetic_dataset(num_records=100, seed=42)
 
-    # Save full batch (100 rows)
     full_path = os.path.join(data_dir, "synthetic_failures.csv")
     df.to_csv(full_path, index=False)
     print(f"[OK] Saved full synthetic dataset (100 rows) to {full_path}")
 
     # Extract 20-row balanced ground truth benchmark set
-    # Ensure representation from each failure class
     benchmark_rows = []
     for cat in df["ground_truth_category"].unique():
         sub_df = df[df["ground_truth_category"] == cat]
@@ -159,7 +241,6 @@ def save_datasets(data_dir: str):
         benchmark_rows.append(sub_df.sample(n=sample_count, random_state=42))
     
     benchmark_df = pd.concat(benchmark_rows).reset_index(drop=True)
-    # Trim or expand to exactly 20 rows if needed
     if len(benchmark_df) > 20:
         benchmark_df = benchmark_df.head(20)
     elif len(benchmark_df) < 20:
