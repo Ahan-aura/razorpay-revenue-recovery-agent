@@ -9,36 +9,44 @@
     "failure_code": "GATEWAY_ERROR",
     "error_description": "Issuer bank payment gateway did not respond within the 45-second timeout window.",
     "classified_failure_type": "bank_timeout",
-    "confidence": 1.0,
-    "classification_reasoning": "The issuer bank payment gateway failed to respond within the designated 45-second timeout window, indicating an unresponsive bank switch.",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
     "action_taken": "retry_payment_link",
     "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
     "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
     "delay_hours": 0,
     "requires_human_review": false,
     "escalation_reason": null,
-    "outcome": "action_dispatched",
-    "verification": "dispatched_pending",
+    "outcome": "recovered",
+    "verification": "live_verified",
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_69421751",
-      "short_url": "https://rzp.io/i/plink_test_69421751",
+      "payment_link_id": "plink_test_14441741",
+      "short_url": "https://rzp.io/i/plink_test_14441741",
       "amount_inr": 1999.0,
       "raw_response": {
-        "id": "plink_test_69421751",
+        "id": "plink_test_14441741",
         "amount": 199900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_69421751",
+        "short_url": "https://rzp.io/i/plink_test_14441741",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Sai, your payment of Rs. 1,999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_69421751",
+      "channel_sms": "Hi Sai, your payment of Rs. 1,999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_14441741",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Sai,\n\nYour payment of Rs. 1,999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_69421751\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Sai,\n\nYour payment of Rs. 1,999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_14441741\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:50:15.328924"
+    "timestamp": "2026-08-23T13:05:36.978764",
+    "webhook_captured_at": "2026-08-23T13:05:52.802164",
+    "recovered_amount": 1999.0,
+    "webhook_metadata": {
+      "event": "payment.captured",
+      "method": "upi",
+      "vpa": "success@razorpay",
+      "verified_signature_hmac_sha256": "efa1c3a0f3af913e4c2f19c95902c1a59fb3abf27e5f78078911758e879fb19b"
+    }
   },
   {
     "payment_id": "pay_syn_0002_2535",
@@ -50,8 +58,8 @@
     "failure_code": "CARD_EXPIRED_ERROR",
     "error_description": "Card validity date has lapsed or card has been deactivated by the cardholder bank.",
     "classified_failure_type": "expired_card",
-    "confidence": 1.0,
-    "classification_reasoning": "The transaction failed explicitly due to an expired card validity date as reported by the bank with code CARD_EXPIRED_ERROR.",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
     "action_taken": "create_payment_link",
     "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
     "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
@@ -63,23 +71,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_32986433",
-      "short_url": "https://rzp.io/i/plink_test_32986433",
+      "payment_link_id": "plink_test_81598771",
+      "short_url": "https://rzp.io/i/plink_test_81598771",
       "amount_inr": 1499.0,
       "raw_response": {
-        "id": "plink_test_32986433",
+        "id": "plink_test_81598771",
         "amount": 149900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_32986433",
+        "short_url": "https://rzp.io/i/plink_test_81598771",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Muhammad, your recent payment of Rs. 1,499 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_32986433",
+      "channel_sms": "Hi Muhammad, your recent payment of Rs. 1,499 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_81598771",
       "email_subject": "Action Required: Update payment method for your subscription",
-      "email_body": "Dear Muhammad,\n\nWe noticed that your latest payment of Rs. 1,499 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_32986433\n\nThank you,\nCustomer Support Team"
+      "email_body": "Dear Muhammad,\n\nWe noticed that your latest payment of Rs. 1,499 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_81598771\n\nThank you,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:50:27.466602"
+    "timestamp": "2026-08-23T13:05:37.016714"
   },
   {
     "payment_id": "pay_syn_0003_4611",
@@ -91,8 +99,8 @@
     "failure_code": "NPCI_UPI_MANDATE_U69",
     "error_description": "UPI Autopay mandate execution failed: Mandate paused or revoked by user in PSP app.",
     "classified_failure_type": "mandate_declined",
-    "confidence": 0.98,
-    "classification_reasoning": "The UPI Autopay execution failed because the mandate was explicitly paused or revoked by the user within their PSP application.",
+    "confidence": 0.94,
+    "classification_reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error.",
     "action_taken": "create_payment_link",
     "rule_fired": "RULE_5C_MANDATE_DECLINED_REAUTH",
     "policy_reason": "E-mandate declined by bank. Dispatched new payment link for re-authorization.",
@@ -104,23 +112,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_99561567",
-      "short_url": "https://rzp.io/i/plink_test_99561567",
+      "payment_link_id": "plink_test_29429635",
+      "short_url": "https://rzp.io/i/plink_test_29429635",
       "amount_inr": 2499.0,
       "raw_response": {
-        "id": "plink_test_99561567",
+        "id": "plink_test_29429635",
         "amount": 249900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_99561567",
+        "short_url": "https://rzp.io/i/plink_test_29429635",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Pari, your recurring mandate for Rs. 2,499 was declined by your bank. Re-authorize your payment here: https://rzp.io/i/plink_test_99561567",
+      "channel_sms": "Hi Pari, your recurring mandate for Rs. 2,499 was declined by your bank. Re-authorize your payment here: https://rzp.io/i/plink_test_29429635",
       "email_subject": "Mandate Re-authorization Needed",
-      "email_body": "Dear Pari,\n\nYour recurring subscription mandate of Rs. 2,499 was declined by your issuer bank.\nPlease authorize a fresh payment or update your mandate using our secure portal:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_99561567\n\nThank you,\nAccount Management Team"
+      "email_body": "Dear Pari,\n\nYour recurring subscription mandate of Rs. 2,499 was declined by your issuer bank.\nPlease authorize a fresh payment or update your mandate using our secure portal:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_29429635\n\nThank you,\nAccount Management Team"
     },
-    "timestamp": "2026-08-23T12:50:33.420552"
+    "timestamp": "2026-08-23T13:05:37.063062"
   },
   {
     "payment_id": "pay_syn_0004_4527",
@@ -132,8 +140,8 @@
     "failure_code": "CARD_EXPIRED_ERROR",
     "error_description": "Card validity date has lapsed or card has been deactivated by the cardholder bank.",
     "classified_failure_type": "expired_card",
-    "confidence": 0.99,
-    "classification_reasoning": "The payment failed because the card validity date has lapsed, as indicated by the error code CARD_EXPIRED_ERROR and explicit card_expired reason.",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
     "action_taken": "create_payment_link",
     "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
     "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
@@ -145,23 +153,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_19626784",
-      "short_url": "https://rzp.io/i/plink_test_19626784",
+      "payment_link_id": "plink_test_58663141",
+      "short_url": "https://rzp.io/i/plink_test_58663141",
       "amount_inr": 150.0,
       "raw_response": {
-        "id": "plink_test_19626784",
+        "id": "plink_test_58663141",
         "amount": 15000,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_19626784",
+        "short_url": "https://rzp.io/i/plink_test_58663141",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Diya, your recent payment of Rs. 150 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_19626784",
+      "channel_sms": "Hi Diya, your recent payment of Rs. 150 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_58663141",
       "email_subject": "Action Required: Update payment method for your subscription",
-      "email_body": "Dear Diya,\n\nWe noticed that your latest payment of Rs. 150 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_19626784\n\nThank you,\nCustomer Support Team"
+      "email_body": "Dear Diya,\n\nWe noticed that your latest payment of Rs. 150 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_58663141\n\nThank you,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:50:44.549863"
+    "timestamp": "2026-08-23T13:05:37.106756"
   },
   {
     "payment_id": "pay_syn_0005_8527",
@@ -173,8 +181,8 @@
     "failure_code": "GATEWAY_ERROR",
     "error_description": "Issuer bank payment gateway did not respond within the 45-second timeout window.",
     "classified_failure_type": "bank_timeout",
-    "confidence": 0.99,
-    "classification_reasoning": "The payment failed because the issuer bank payment gateway did not respond within the mandatory 45-second timeout window.",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
     "action_taken": "retry_payment_link",
     "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
     "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
@@ -186,23 +194,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_25437751",
-      "short_url": "https://rzp.io/i/plink_test_25437751",
+      "payment_link_id": "plink_test_35799983",
+      "short_url": "https://rzp.io/i/plink_test_35799983",
       "amount_inr": 1499.0,
       "raw_response": {
-        "id": "plink_test_25437751",
+        "id": "plink_test_35799983",
         "amount": 149900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_25437751",
+        "short_url": "https://rzp.io/i/plink_test_35799983",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Isha, your payment of Rs. 1,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_25437751",
+      "channel_sms": "Hi Isha, your payment of Rs. 1,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_35799983",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Isha,\n\nYour payment of Rs. 1,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_25437751\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Isha,\n\nYour payment of Rs. 1,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_35799983\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:50:49.999427"
+    "timestamp": "2026-08-23T13:05:37.140849"
   },
   {
     "payment_id": "pay_syn_0006_4150",
@@ -214,8 +222,8 @@
     "failure_code": "NPCI_TIMEOUT_96",
     "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
     "classified_failure_type": "bank_timeout",
-    "confidence": 0.98,
-    "classification_reasoning": "The transaction failed due to an NPCI UPI switch timeout and lack of response from the beneficiary bank switch.",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
     "action_taken": "retry_payment_link",
     "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
     "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
@@ -227,23 +235,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_37203199",
-      "short_url": "https://rzp.io/i/plink_test_37203199",
+      "payment_link_id": "plink_test_45755519",
+      "short_url": "https://rzp.io/i/plink_test_45755519",
       "amount_inr": 2499.0,
       "raw_response": {
-        "id": "plink_test_37203199",
+        "id": "plink_test_45755519",
         "amount": 249900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_37203199",
+        "short_url": "https://rzp.io/i/plink_test_45755519",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Aditya, your payment of Rs. 2,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_37203199",
+      "channel_sms": "Hi Aditya, your payment of Rs. 2,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_45755519",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Aditya,\n\nYour payment of Rs. 2,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_37203199\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Aditya,\n\nYour payment of Rs. 2,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_45755519\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:50:54.512470"
+    "timestamp": "2026-08-23T13:05:37.178754"
   },
   {
     "payment_id": "pay_syn_0007_7227",
@@ -255,8 +263,8 @@
     "failure_code": "INTERNAL_SERVER_ERROR",
     "error_description": "Network switch connection reset during authentication handshake. Ephemeral gateway glitch.",
     "classified_failure_type": "technical_error",
-    "confidence": 0.98,
-    "classification_reasoning": "The payment failed due to a network switch connection reset during the authentication handshake, indicating an internal gateway or network-level technical glitch.",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
     "action_taken": "retry_payment_link",
     "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
     "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
@@ -268,23 +276,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_46986984",
-      "short_url": "https://rzp.io/i/plink_test_46986984",
+      "payment_link_id": "plink_test_38350142",
+      "short_url": "https://rzp.io/i/plink_test_38350142",
       "amount_inr": 350.0,
       "raw_response": {
-        "id": "plink_test_46986984",
+        "id": "plink_test_38350142",
         "amount": 35000,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_46986984",
+        "short_url": "https://rzp.io/i/plink_test_38350142",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Ayaan, your payment of Rs. 350 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_46986984",
+      "channel_sms": "Hi Ayaan, your payment of Rs. 350 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_38350142",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Ayaan,\n\nYour payment of Rs. 350 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_46986984\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Ayaan,\n\nYour payment of Rs. 350 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_38350142\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:51:03.996327"
+    "timestamp": "2026-08-23T13:05:37.210569"
   },
   {
     "payment_id": "pay_syn_0008_2169",
@@ -309,23 +317,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_13530715",
-      "short_url": "https://rzp.io/i/plink_test_13530715",
+      "payment_link_id": "plink_test_86685901",
+      "short_url": "https://rzp.io/i/plink_test_86685901",
       "amount_inr": 499.0,
       "raw_response": {
-        "id": "plink_test_13530715",
+        "id": "plink_test_86685901",
         "amount": 49900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_13530715",
+        "short_url": "https://rzp.io/i/plink_test_86685901",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Avani, your payment of Rs. 499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_13530715",
+      "channel_sms": "Hi Avani, your payment of Rs. 499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_86685901",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Avani,\n\nYour payment of Rs. 499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_13530715\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Avani,\n\nYour payment of Rs. 499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_86685901\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:51:07.997803"
+    "timestamp": "2026-08-23T13:05:37.249438"
   },
   {
     "payment_id": "pay_syn_0009_4598",
@@ -349,7 +357,7 @@
     "verification": "not_applicable",
     "action_details": {},
     "customer_notification": {},
-    "timestamp": "2026-08-23T12:51:12.005080"
+    "timestamp": "2026-08-23T13:05:37.280993"
   },
   {
     "payment_id": "pay_syn_0010_4456",
@@ -374,23 +382,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_40607481",
-      "short_url": "https://rzp.io/i/plink_test_40607481",
+      "payment_link_id": "plink_test_32039184",
+      "short_url": "https://rzp.io/i/plink_test_32039184",
       "amount_inr": 1200.0,
       "raw_response": {
-        "id": "plink_test_40607481",
+        "id": "plink_test_32039184",
         "amount": 120000,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_40607481",
+        "short_url": "https://rzp.io/i/plink_test_32039184",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Riya, your recent payment of Rs. 1,200 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_40607481",
+      "channel_sms": "Hi Riya, your recent payment of Rs. 1,200 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_32039184",
       "email_subject": "Action Required: Update payment method for your subscription",
-      "email_body": "Dear Riya,\n\nWe noticed that your latest payment of Rs. 1,200 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_40607481\n\nThank you,\nCustomer Support Team"
+      "email_body": "Dear Riya,\n\nWe noticed that your latest payment of Rs. 1,200 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_32039184\n\nThank you,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:51:15.986791"
+    "timestamp": "2026-08-23T13:05:37.322080"
   },
   {
     "payment_id": "pay_syn_0011_9830",
@@ -402,8 +410,8 @@
     "failure_code": "NPCI_RESP_114",
     "error_description": "NPCI Debit decline: Available balance below requested transaction amount.",
     "classified_failure_type": "insufficient_funds",
-    "confidence": 0.99,
-    "classification_reasoning": "The transaction was declined by NPCI because the customer's available bank balance is less than the required payment amount of \u20b9750.",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
     "action_taken": "schedule_delayed_retry",
     "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
     "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
@@ -415,23 +423,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_56802800",
-      "short_url": "https://rzp.io/i/plink_test_56802800",
+      "payment_link_id": "plink_test_99518151",
+      "short_url": "https://rzp.io/i/plink_test_99518151",
       "amount_inr": 750.0,
       "raw_response": {
-        "id": "plink_test_56802800",
+        "id": "plink_test_99518151",
         "amount": 75000,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_56802800",
+        "short_url": "https://rzp.io/i/plink_test_99518151",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Ayaan, your payment of Rs. 750 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_56802800",
+      "channel_sms": "Hi Ayaan, your payment of Rs. 750 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_99518151",
       "email_subject": "Payment reminder: Your pending transaction",
-      "email_body": "Dear Ayaan,\n\nYour payment of Rs. 750 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_56802800\n\nBest regards,\nCustomer Support Team"
+      "email_body": "Dear Ayaan,\n\nYour payment of Rs. 750 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_99518151\n\nBest regards,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:51:20.586083"
+    "timestamp": "2026-08-23T13:05:37.364070"
   },
   {
     "payment_id": "pay_syn_0012_2489",
@@ -443,8 +451,8 @@
     "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
     "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
     "classified_failure_type": "insufficient_funds",
-    "confidence": 0.99,
-    "classification_reasoning": "The payment failed because the customer's debit account lacked the required minimum balance at the scheduled subscription execution time.",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
     "action_taken": "schedule_delayed_retry",
     "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
     "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
@@ -456,23 +464,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_92303764",
-      "short_url": "https://rzp.io/i/plink_test_92303764",
+      "payment_link_id": "plink_test_29596840",
+      "short_url": "https://rzp.io/i/plink_test_29596840",
       "amount_inr": 2499.0,
       "raw_response": {
-        "id": "plink_test_92303764",
+        "id": "plink_test_29596840",
         "amount": 249900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_92303764",
+        "short_url": "https://rzp.io/i/plink_test_29596840",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Vivaan, your payment of Rs. 2,499 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_92303764",
+      "channel_sms": "Hi Vivaan, your payment of Rs. 2,499 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_29596840",
       "email_subject": "Payment reminder: Your pending transaction",
-      "email_body": "Dear Vivaan,\n\nYour payment of Rs. 2,499 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_92303764\n\nBest regards,\nCustomer Support Team"
+      "email_body": "Dear Vivaan,\n\nYour payment of Rs. 2,499 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_29596840\n\nBest regards,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:51:24.322813"
+    "timestamp": "2026-08-23T13:05:37.406689"
   },
   {
     "payment_id": "pay_syn_0013_8668",
@@ -484,8 +492,8 @@
     "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
     "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
     "classified_failure_type": "insufficient_funds",
-    "confidence": 0.99,
-    "classification_reasoning": "The transaction failed because the customer's debit account did not have a sufficient minimum balance to complete the subscription payment at the scheduled time.",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
     "action_taken": "schedule_delayed_retry",
     "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
     "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
@@ -497,23 +505,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_47300952",
-      "short_url": "https://rzp.io/i/plink_test_47300952",
+      "payment_link_id": "plink_test_52747800",
+      "short_url": "https://rzp.io/i/plink_test_52747800",
       "amount_inr": 1999.0,
       "raw_response": {
-        "id": "plink_test_47300952",
+        "id": "plink_test_52747800",
         "amount": 199900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_47300952",
+        "short_url": "https://rzp.io/i/plink_test_52747800",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Myra, your payment of Rs. 1,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_47300952",
+      "channel_sms": "Hi Myra, your payment of Rs. 1,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_52747800",
       "email_subject": "Payment reminder: Your pending transaction",
-      "email_body": "Dear Myra,\n\nYour payment of Rs. 1,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_47300952\n\nBest regards,\nCustomer Support Team"
+      "email_body": "Dear Myra,\n\nYour payment of Rs. 1,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_52747800\n\nBest regards,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:51:29.523024"
+    "timestamp": "2026-08-23T13:05:37.461677"
   },
   {
     "payment_id": "pay_syn_0014_6573",
@@ -525,8 +533,8 @@
     "failure_code": "NPCI_TIMEOUT_96",
     "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
     "classified_failure_type": "bank_timeout",
-    "confidence": 0.98,
-    "classification_reasoning": "The transaction failed because the NPCI UPI switch timed out while waiting for a response from the beneficiary bank.",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
     "action_taken": "retry_payment_link",
     "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
     "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
@@ -538,23 +546,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_56885154",
-      "short_url": "https://rzp.io/i/plink_test_56885154",
+      "payment_link_id": "plink_test_92456724",
+      "short_url": "https://rzp.io/i/plink_test_92456724",
       "amount_inr": 999.0,
       "raw_response": {
-        "id": "plink_test_56885154",
+        "id": "plink_test_92456724",
         "amount": 99900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_56885154",
+        "short_url": "https://rzp.io/i/plink_test_92456724",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Vihaan, your payment of Rs. 999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_56885154",
+      "channel_sms": "Hi Vihaan, your payment of Rs. 999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_92456724",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Vihaan,\n\nYour payment of Rs. 999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_56885154\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Vihaan,\n\nYour payment of Rs. 999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_92456724\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:51:34.690857"
+    "timestamp": "2026-08-23T13:05:37.510835"
   },
   {
     "payment_id": "pay_syn_0015_9201",
@@ -565,12 +573,12 @@
     "payment_type": "one_time",
     "failure_code": "BANK_SWITCH_91",
     "error_description": "Issuer bank system down/inoperative during processing window.",
-    "classified_failure_type": "bank_timeout",
-    "confidence": 0.95,
-    "classification_reasoning": "The issuer bank switch was down/inoperative during the processing window, indicating a bank-side switch unresponsiveness or outage.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
     "action_taken": "retry_payment_link",
-    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
-    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
     "delay_hours": 0,
     "requires_human_review": false,
     "escalation_reason": null,
@@ -579,23 +587,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_29098734",
-      "short_url": "https://rzp.io/i/plink_test_29098734",
+      "payment_link_id": "plink_test_30415589",
+      "short_url": "https://rzp.io/i/plink_test_30415589",
       "amount_inr": 4999.0,
       "raw_response": {
-        "id": "plink_test_29098734",
+        "id": "plink_test_30415589",
         "amount": 499900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_29098734",
+        "short_url": "https://rzp.io/i/plink_test_30415589",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Reyansh, your payment of Rs. 4,999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_29098734",
+      "channel_sms": "Hi Reyansh, your payment of Rs. 4,999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_30415589",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Reyansh,\n\nYour payment of Rs. 4,999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_29098734\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Reyansh,\n\nYour payment of Rs. 4,999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_30415589\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:51:43.706701"
+    "timestamp": "2026-08-23T13:05:37.567604"
   },
   {
     "payment_id": "pay_syn_0016_3646",
@@ -607,8 +615,8 @@
     "failure_code": "BANK_DEBIT_DECLINE_51",
     "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
     "classified_failure_type": "insufficient_funds",
-    "confidence": 0.99,
-    "classification_reasoning": "The issuer bank decline code 51 directly corresponds to insufficient account balance/credit limit.",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
     "action_taken": "schedule_delayed_retry",
     "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
     "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
@@ -620,23 +628,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_24344044",
-      "short_url": "https://rzp.io/i/plink_test_24344044",
+      "payment_link_id": "plink_test_52904022",
+      "short_url": "https://rzp.io/i/plink_test_52904022",
       "amount_inr": 1200.0,
       "raw_response": {
-        "id": "plink_test_24344044",
+        "id": "plink_test_52904022",
         "amount": 120000,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_24344044",
+        "short_url": "https://rzp.io/i/plink_test_52904022",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Isha, your payment of Rs. 1,200 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_24344044",
+      "channel_sms": "Hi Isha, your payment of Rs. 1,200 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_52904022",
       "email_subject": "Payment reminder: Your pending transaction",
-      "email_body": "Dear Isha,\n\nYour payment of Rs. 1,200 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_24344044\n\nBest regards,\nCustomer Support Team"
+      "email_body": "Dear Isha,\n\nYour payment of Rs. 1,200 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_52904022\n\nBest regards,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:51:48.426537"
+    "timestamp": "2026-08-23T13:05:37.617000"
   },
   {
     "payment_id": "pay_syn_0017_4923",
@@ -661,23 +669,23 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_82882010",
-      "short_url": "https://rzp.io/i/plink_test_82882010",
+      "payment_link_id": "plink_test_29998265",
+      "short_url": "https://rzp.io/i/plink_test_29998265",
       "amount_inr": 299.0,
       "raw_response": {
-        "id": "plink_test_82882010",
+        "id": "plink_test_29998265",
         "amount": 29900,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_82882010",
+        "short_url": "https://rzp.io/i/plink_test_29998265",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Vivaan, your recent payment of Rs. 299 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_82882010",
+      "channel_sms": "Hi Vivaan, your recent payment of Rs. 299 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_29998265",
       "email_subject": "Action Required: Update payment method for your subscription",
-      "email_body": "Dear Vivaan,\n\nWe noticed that your latest payment of Rs. 299 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_82882010\n\nThank you,\nCustomer Support Team"
+      "email_body": "Dear Vivaan,\n\nWe noticed that your latest payment of Rs. 299 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_29998265\n\nThank you,\nCustomer Support Team"
     },
-    "timestamp": "2026-08-23T12:51:52.473276"
+    "timestamp": "2026-08-23T13:05:37.662751"
   },
   {
     "payment_id": "pay_syn_0018_3060",
@@ -701,7 +709,7 @@
     "verification": "not_applicable",
     "action_details": {},
     "customer_notification": {},
-    "timestamp": "2026-08-23T12:51:56.470135"
+    "timestamp": "2026-08-23T13:05:37.721096"
   },
   {
     "payment_id": "pay_syn_0019_9835",
@@ -726,22 +734,3088 @@
     "action_details": {
       "status": "success",
       "mode": "sandbox_simulated",
-      "payment_link_id": "plink_test_15855999",
-      "short_url": "https://rzp.io/i/plink_test_15855999",
+      "payment_link_id": "plink_test_19970148",
+      "short_url": "https://rzp.io/i/plink_test_19970148",
       "amount_inr": 1200.0,
       "raw_response": {
-        "id": "plink_test_15855999",
+        "id": "plink_test_19970148",
         "amount": 120000,
         "currency": "INR",
-        "short_url": "https://rzp.io/i/plink_test_15855999",
+        "short_url": "https://rzp.io/i/plink_test_19970148",
         "status": "created"
       }
     },
     "customer_notification": {
-      "channel_sms": "Hi Muhammad, your payment of Rs. 1,200 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_15855999",
+      "channel_sms": "Hi Muhammad, your payment of Rs. 1,200 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_19970148",
       "email_subject": "Payment retry: Complete your transaction",
-      "email_body": "Dear Muhammad,\n\nYour payment of Rs. 1,200 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_15855999\n\nWarm regards,\nSupport Team"
+      "email_body": "Dear Muhammad,\n\nYour payment of Rs. 1,200 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_19970148\n\nWarm regards,\nSupport Team"
     },
-    "timestamp": "2026-08-23T12:52:00.468037"
+    "timestamp": "2026-08-23T13:05:37.763434"
+  },
+  {
+    "payment_id": "pay_syn_0020_6539",
+    "customer_id": "CUST_0020",
+    "customer_name": "Aarav Joshi",
+    "amount": 1499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BAD_REQUEST_ERROR",
+    "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:37.808780"
+  },
+  {
+    "payment_id": "pay_syn_0021_4750",
+    "customer_id": "CUST_0021",
+    "customer_name": "Aditya Verma",
+    "amount": 1499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "MANDATE_DEBIT_DECLINED",
+    "error_description": "Recurring e-mandate declined by destination bank: Mandate limit exceeded or mandate inactive.",
+    "classified_failure_type": "mandate_declined",
+    "confidence": 0.94,
+    "classification_reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5C_MANDATE_DECLINED_REAUTH",
+    "policy_reason": "E-mandate declined by bank. Dispatched new payment link for re-authorization.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_65123055",
+      "short_url": "https://rzp.io/i/plink_test_65123055",
+      "amount_inr": 1499.0,
+      "raw_response": {
+        "id": "plink_test_65123055",
+        "amount": 149900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_65123055",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aditya, your recurring mandate for Rs. 1,499 was declined by your bank. Re-authorize your payment here: https://rzp.io/i/plink_test_65123055",
+      "email_subject": "Mandate Re-authorization Needed",
+      "email_body": "Dear Aditya,\n\nYour recurring subscription mandate of Rs. 1,499 was declined by your issuer bank.\nPlease authorize a fresh payment or update your mandate using our secure portal:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_65123055\n\nThank you,\nAccount Management Team"
+    },
+    "timestamp": "2026-08-23T13:05:37.862716"
+  },
+  {
+    "payment_id": "pay_syn_0022_3167",
+    "customer_id": "CUST_0022",
+    "customer_name": "Riya Joshi",
+    "amount": 2499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "HTTP_GATEWAY_TIMEOUT_504",
+    "error_description": "Core banking system (CBS) response deadline exceeded during debit authentication.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_60621263",
+      "short_url": "https://rzp.io/i/plink_test_60621263",
+      "amount_inr": 2499.0,
+      "raw_response": {
+        "id": "plink_test_60621263",
+        "amount": 249900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_60621263",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Riya, your payment of Rs. 2,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_60621263",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Riya,\n\nYour payment of Rs. 2,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_60621263\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:37.917540"
+  },
+  {
+    "payment_id": "pay_syn_0023_8062",
+    "customer_id": "CUST_0023",
+    "customer_name": "Saanvi Kaur",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BAD_REQUEST_ERROR",
+    "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_16214073",
+      "short_url": "https://rzp.io/i/plink_test_16214073",
+      "amount_inr": 4999.0,
+      "raw_response": {
+        "id": "plink_test_16214073",
+        "amount": 499900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_16214073",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Saanvi, your payment of Rs. 4,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_16214073",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Saanvi,\n\nYour payment of Rs. 4,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_16214073\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:37.965575"
+  },
+  {
+    "payment_id": "pay_syn_0024_1993",
+    "customer_id": "CUST_0024",
+    "customer_name": "Ananya Bose",
+    "amount": 350.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "RISK_ENGINE_REJECTED",
+    "error_description": "Transaction rejected by fraud detection engine: suspicious IP velocity and unusual payment pattern.",
+    "classified_failure_type": "fraud_suspected",
+    "confidence": 0.95,
+    "classification_reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator.",
+    "action_taken": "escalate_fraud_review",
+    "rule_fired": "RULE_2_FRAUD_BLOCK",
+    "policy_reason": "High risk or suspicious activity detected. Immediate human security escalation.",
+    "delay_hours": 0,
+    "requires_human_review": true,
+    "escalation_reason": "Suspected fraudulent pattern or risk engine rejection.",
+    "outcome": "escalated",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:37.999258"
+  },
+  {
+    "payment_id": "pay_syn_0025_4006",
+    "customer_id": "CUST_0025",
+    "customer_name": "Ayaan Deshmukh",
+    "amount": 999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "ISO_8583_DECLINE_54",
+    "error_description": "Card tokenization expired. Issuer rejected debit due to card expiry MM/YY.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_10883878",
+      "short_url": "https://rzp.io/i/plink_test_10883878",
+      "amount_inr": 999.0,
+      "raw_response": {
+        "id": "plink_test_10883878",
+        "amount": 99900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_10883878",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ayaan, your recent payment of Rs. 999 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_10883878",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Ayaan,\n\nWe noticed that your latest payment of Rs. 999 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_10883878\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.049106"
+  },
+  {
+    "payment_id": "pay_syn_0026_1241",
+    "customer_id": "CUST_0026",
+    "customer_name": "Aditya Rao",
+    "amount": 1200.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "HTTP_GATEWAY_TIMEOUT_504",
+    "error_description": "Core banking system (CBS) response deadline exceeded during debit authentication.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_77093194",
+      "short_url": "https://rzp.io/i/plink_test_77093194",
+      "amount_inr": 1200.0,
+      "raw_response": {
+        "id": "plink_test_77093194",
+        "amount": 120000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_77093194",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aditya, your payment of Rs. 1,200 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_77093194",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Aditya,\n\nYour payment of Rs. 1,200 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_77093194\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.080630"
+  },
+  {
+    "payment_id": "pay_syn_0027_3697",
+    "customer_id": "CUST_0027",
+    "customer_name": "Ananya Sharma",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "CARD_EXPIRED_ERROR",
+    "error_description": "Card validity date has lapsed or card has been deactivated by the cardholder bank.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_28288498",
+      "short_url": "https://rzp.io/i/plink_test_28288498",
+      "amount_inr": 4999.0,
+      "raw_response": {
+        "id": "plink_test_28288498",
+        "amount": 499900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_28288498",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ananya, your recent payment of Rs. 4,999 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_28288498",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Ananya,\n\nWe noticed that your latest payment of Rs. 4,999 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_28288498\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.135581"
+  },
+  {
+    "payment_id": "pay_syn_0028_8973",
+    "customer_id": "CUST_0028",
+    "customer_name": "Arjun Reddy",
+    "amount": 299.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "ENACH_DECLINE_U30",
+    "error_description": "eNACH standing instruction rejected: Max per-transaction debit limit exceeded.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_86922064",
+      "short_url": "https://rzp.io/i/plink_test_86922064",
+      "amount_inr": 299.0,
+      "raw_response": {
+        "id": "plink_test_86922064",
+        "amount": 29900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_86922064",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Arjun, your payment of Rs. 299 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_86922064",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Arjun,\n\nYour payment of Rs. 299 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_86922064\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.173158"
+  },
+  {
+    "payment_id": "pay_syn_0029_1936",
+    "customer_id": "CUST_0029",
+    "customer_name": "Vivaan Joshi",
+    "amount": 299.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_52208836",
+      "short_url": "https://rzp.io/i/plink_test_52208836",
+      "amount_inr": 299.0,
+      "raw_response": {
+        "id": "plink_test_52208836",
+        "amount": 29900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_52208836",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Vivaan, your payment of Rs. 299 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_52208836",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Vivaan,\n\nYour payment of Rs. 299 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_52208836\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.218674"
+  },
+  {
+    "payment_id": "pay_syn_0030_4853",
+    "customer_id": "CUST_0030",
+    "customer_name": "Ananya Mehta",
+    "amount": 1499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BAD_REQUEST_ERROR",
+    "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:38.253557"
+  },
+  {
+    "payment_id": "pay_syn_0031_5272",
+    "customer_id": "CUST_0031",
+    "customer_name": "Muhammad Bose",
+    "amount": 1200.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_58221861",
+      "short_url": "https://rzp.io/i/plink_test_58221861",
+      "amount_inr": 1200.0,
+      "raw_response": {
+        "id": "plink_test_58221861",
+        "amount": 120000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_58221861",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Muhammad, your payment of Rs. 1,200 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_58221861",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Muhammad,\n\nYour payment of Rs. 1,200 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_58221861\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.297659"
+  },
+  {
+    "payment_id": "pay_syn_0032_2188",
+    "customer_id": "CUST_0032",
+    "customer_name": "Aarav Deshmukh",
+    "amount": 299.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_39210639",
+      "short_url": "https://rzp.io/i/plink_test_39210639",
+      "amount_inr": 299.0,
+      "raw_response": {
+        "id": "plink_test_39210639",
+        "amount": 29900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_39210639",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aarav, your payment of Rs. 299 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_39210639",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Aarav,\n\nYour payment of Rs. 299 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_39210639\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.343180"
+  },
+  {
+    "payment_id": "pay_syn_0033_2127",
+    "customer_id": "CUST_0033",
+    "customer_name": "Sai Das",
+    "amount": 999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_65550385",
+      "short_url": "https://rzp.io/i/plink_test_65550385",
+      "amount_inr": 999.0,
+      "raw_response": {
+        "id": "plink_test_65550385",
+        "amount": 99900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_65550385",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Sai, your payment of Rs. 999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_65550385",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Sai,\n\nYour payment of Rs. 999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_65550385\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.374709"
+  },
+  {
+    "payment_id": "pay_syn_0034_9666",
+    "customer_id": "CUST_0034",
+    "customer_name": "Aarav Menon",
+    "amount": 499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "HTTP_GATEWAY_TIMEOUT_504",
+    "error_description": "Core banking system (CBS) response deadline exceeded during debit authentication.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_84892974",
+      "short_url": "https://rzp.io/i/plink_test_84892974",
+      "amount_inr": 499.0,
+      "raw_response": {
+        "id": "plink_test_84892974",
+        "amount": 49900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_84892974",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aarav, your payment of Rs. 499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_84892974",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Aarav,\n\nYour payment of Rs. 499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_84892974\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.437476"
+  },
+  {
+    "payment_id": "pay_syn_0035_5462",
+    "customer_id": "CUST_0035",
+    "customer_name": "Krishna Bhat",
+    "amount": 350.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "NPCI_RESP_114",
+    "error_description": "NPCI Debit decline: Available balance below requested transaction amount.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_94822785",
+      "short_url": "https://rzp.io/i/plink_test_94822785",
+      "amount_inr": 350.0,
+      "raw_response": {
+        "id": "plink_test_94822785",
+        "amount": 35000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_94822785",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Krishna, your payment of Rs. 350 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_94822785",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Krishna,\n\nYour payment of Rs. 350 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_94822785\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.483492"
+  },
+  {
+    "payment_id": "pay_syn_0036_5114",
+    "customer_id": "CUST_0036",
+    "customer_name": "Vivaan Patel",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:38.543598"
+  },
+  {
+    "payment_id": "pay_syn_0037_5291",
+    "customer_id": "CUST_0037",
+    "customer_name": "Reyansh Deshmukh",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "CARD_EXPIRED_ERROR",
+    "error_description": "Card validity date has lapsed or card has been deactivated by the cardholder bank.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_55627430",
+      "short_url": "https://rzp.io/i/plink_test_55627430",
+      "amount_inr": 2500.0,
+      "raw_response": {
+        "id": "plink_test_55627430",
+        "amount": 250000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_55627430",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Reyansh, your recent payment of Rs. 2,500 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_55627430",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Reyansh,\n\nWe noticed that your latest payment of Rs. 2,500 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_55627430\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.602299"
+  },
+  {
+    "payment_id": "pay_syn_0038_3442",
+    "customer_id": "CUST_0038",
+    "customer_name": "Isha Verma",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_FRAUD_BLOCK_59",
+    "error_description": "Security perimeter triggered: Velocity threshold breached on merchant endpoint.",
+    "classified_failure_type": "fraud_suspected",
+    "confidence": 0.95,
+    "classification_reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator.",
+    "action_taken": "escalate_fraud_review",
+    "rule_fired": "RULE_2_FRAUD_BLOCK",
+    "policy_reason": "High risk or suspicious activity detected. Immediate human security escalation.",
+    "delay_hours": 0,
+    "requires_human_review": true,
+    "escalation_reason": "Suspected fraudulent pattern or risk engine rejection.",
+    "outcome": "escalated",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:38.654835"
+  },
+  {
+    "payment_id": "pay_syn_0039_6974",
+    "customer_id": "CUST_0039",
+    "customer_name": "Vivaan Das",
+    "amount": 1999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_15811930",
+      "short_url": "https://rzp.io/i/plink_test_15811930",
+      "amount_inr": 1999.0,
+      "raw_response": {
+        "id": "plink_test_15811930",
+        "amount": 199900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_15811930",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Vivaan, your payment of Rs. 1,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_15811930",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Vivaan,\n\nYour payment of Rs. 1,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_15811930\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.717331"
+  },
+  {
+    "payment_id": "pay_syn_0040_3532",
+    "customer_id": "CUST_0040",
+    "customer_name": "Sai Nair",
+    "amount": 150.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "NPCI_TIMEOUT_96",
+    "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_55504263",
+      "short_url": "https://rzp.io/i/plink_test_55504263",
+      "amount_inr": 150.0,
+      "raw_response": {
+        "id": "plink_test_55504263",
+        "amount": 15000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_55504263",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Sai, your payment of Rs. 150 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_55504263",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Sai,\n\nYour payment of Rs. 150 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_55504263\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.784076"
+  },
+  {
+    "payment_id": "pay_syn_0041_5065",
+    "customer_id": "CUST_0041",
+    "customer_name": "Ayaan Nair",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "ISO_8583_DECLINE_54",
+    "error_description": "Card tokenization expired. Issuer rejected debit due to card expiry MM/YY.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_75413341",
+      "short_url": "https://rzp.io/i/plink_test_75413341",
+      "amount_inr": 4999.0,
+      "raw_response": {
+        "id": "plink_test_75413341",
+        "amount": 499900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_75413341",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ayaan, your recent payment of Rs. 4,999 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_75413341",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Ayaan,\n\nWe noticed that your latest payment of Rs. 4,999 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_75413341\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.838523"
+  },
+  {
+    "payment_id": "pay_syn_0042_6728",
+    "customer_id": "CUST_0042",
+    "customer_name": "Krishna Rao",
+    "amount": 1999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_88128417",
+      "short_url": "https://rzp.io/i/plink_test_88128417",
+      "amount_inr": 1999.0,
+      "raw_response": {
+        "id": "plink_test_88128417",
+        "amount": 199900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_88128417",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Krishna, your payment of Rs. 1,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_88128417",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Krishna,\n\nYour payment of Rs. 1,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_88128417\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.899904"
+  },
+  {
+    "payment_id": "pay_syn_0043_5573",
+    "customer_id": "CUST_0043",
+    "customer_name": "Saanvi Pillai",
+    "amount": 150.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BAD_REQUEST_ERROR",
+    "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_78955314",
+      "short_url": "https://rzp.io/i/plink_test_78955314",
+      "amount_inr": 150.0,
+      "raw_response": {
+        "id": "plink_test_78955314",
+        "amount": 15000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_78955314",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Saanvi, your payment of Rs. 150 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_78955314",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Saanvi,\n\nYour payment of Rs. 150 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_78955314\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.956760"
+  },
+  {
+    "payment_id": "pay_syn_0044_1626",
+    "customer_id": "CUST_0044",
+    "customer_name": "Vihaan Bhat",
+    "amount": 3499.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_70859725",
+      "short_url": "https://rzp.io/i/plink_test_70859725",
+      "amount_inr": 3499.0,
+      "raw_response": {
+        "id": "plink_test_70859725",
+        "amount": 349900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_70859725",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Vihaan, your payment of Rs. 3,499 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_70859725",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Vihaan,\n\nYour payment of Rs. 3,499 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_70859725\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:38.995633"
+  },
+  {
+    "payment_id": "pay_syn_0045_7311",
+    "customer_id": "CUST_0045",
+    "customer_name": "Riya Reddy",
+    "amount": 150.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "RISK_ENGINE_REJECTED",
+    "error_description": "Transaction rejected by fraud detection engine: suspicious IP velocity and unusual payment pattern.",
+    "classified_failure_type": "fraud_suspected",
+    "confidence": 0.95,
+    "classification_reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:39.059302"
+  },
+  {
+    "payment_id": "pay_syn_0046_4228",
+    "customer_id": "CUST_0046",
+    "customer_name": "Saanvi Kaur",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "TLS_HANDSHAKE_RESET",
+    "error_description": "TCP connection reset by peer during 3DS challenge redirection.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_30469098",
+      "short_url": "https://rzp.io/i/plink_test_30469098",
+      "amount_inr": 2500.0,
+      "raw_response": {
+        "id": "plink_test_30469098",
+        "amount": 250000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_30469098",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Saanvi, your payment of Rs. 2,500 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_30469098",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Saanvi,\n\nYour payment of Rs. 2,500 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_30469098\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.113484"
+  },
+  {
+    "payment_id": "pay_syn_0047_9308",
+    "customer_id": "CUST_0047",
+    "customer_name": "Krishna Kaur",
+    "amount": 3499.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_28576240",
+      "short_url": "https://rzp.io/i/plink_test_28576240",
+      "amount_inr": 3499.0,
+      "raw_response": {
+        "id": "plink_test_28576240",
+        "amount": 349900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_28576240",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Krishna, your payment of Rs. 3,499 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_28576240",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Krishna,\n\nYour payment of Rs. 3,499 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_28576240\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.173552"
+  },
+  {
+    "payment_id": "pay_syn_0048_3851",
+    "customer_id": "CUST_0048",
+    "customer_name": "Avani Joshi",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_44591949",
+      "short_url": "https://rzp.io/i/plink_test_44591949",
+      "amount_inr": 2500.0,
+      "raw_response": {
+        "id": "plink_test_44591949",
+        "amount": 250000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_44591949",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Avani, your payment of Rs. 2,500 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_44591949",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Avani,\n\nYour payment of Rs. 2,500 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_44591949\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.231361"
+  },
+  {
+    "payment_id": "pay_syn_0049_8618",
+    "customer_id": "CUST_0049",
+    "customer_name": "Pari Deshmukh",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_64745555",
+      "short_url": "https://rzp.io/i/plink_test_64745555",
+      "amount_inr": 4999.0,
+      "raw_response": {
+        "id": "plink_test_64745555",
+        "amount": 499900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_64745555",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Pari, your payment of Rs. 4,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_64745555",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Pari,\n\nYour payment of Rs. 4,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_64745555\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.293516"
+  },
+  {
+    "payment_id": "pay_syn_0050_2530",
+    "customer_id": "CUST_0050",
+    "customer_name": "Sai Malhotra",
+    "amount": 499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:39.340367"
+  },
+  {
+    "payment_id": "pay_syn_0051_2193",
+    "customer_id": "CUST_0051",
+    "customer_name": "Pari Kaur",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_FRAUD_BLOCK_59",
+    "error_description": "Security perimeter triggered: Velocity threshold breached on merchant endpoint.",
+    "classified_failure_type": "fraud_suspected",
+    "confidence": 0.95,
+    "classification_reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator.",
+    "action_taken": "escalate_fraud_review",
+    "rule_fired": "RULE_2_FRAUD_BLOCK",
+    "policy_reason": "High risk or suspicious activity detected. Immediate human security escalation.",
+    "delay_hours": 0,
+    "requires_human_review": true,
+    "escalation_reason": "Suspected fraudulent pattern or risk engine rejection.",
+    "outcome": "escalated",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:39.403407"
+  },
+  {
+    "payment_id": "pay_syn_0052_4997",
+    "customer_id": "CUST_0052",
+    "customer_name": "Arjun Sharma",
+    "amount": 350.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "ISO_8583_DECLINE_54",
+    "error_description": "Card tokenization expired. Issuer rejected debit due to card expiry MM/YY.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_29627092",
+      "short_url": "https://rzp.io/i/plink_test_29627092",
+      "amount_inr": 350.0,
+      "raw_response": {
+        "id": "plink_test_29627092",
+        "amount": 35000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_29627092",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Arjun, your recent payment of Rs. 350 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_29627092",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Arjun,\n\nWe noticed that your latest payment of Rs. 350 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_29627092\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.456599"
+  },
+  {
+    "payment_id": "pay_syn_0053_1822",
+    "customer_id": "CUST_0053",
+    "customer_name": "Isha Rao",
+    "amount": 499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "NPCI_UPI_MANDATE_U69",
+    "error_description": "UPI Autopay mandate execution failed: Mandate paused or revoked by user in PSP app.",
+    "classified_failure_type": "mandate_declined",
+    "confidence": 0.94,
+    "classification_reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5C_MANDATE_DECLINED_REAUTH",
+    "policy_reason": "E-mandate declined by bank. Dispatched new payment link for re-authorization.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_59939663",
+      "short_url": "https://rzp.io/i/plink_test_59939663",
+      "amount_inr": 499.0,
+      "raw_response": {
+        "id": "plink_test_59939663",
+        "amount": 49900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_59939663",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Isha, your recurring mandate for Rs. 499 was declined by your bank. Re-authorize your payment here: https://rzp.io/i/plink_test_59939663",
+      "email_subject": "Mandate Re-authorization Needed",
+      "email_body": "Dear Isha,\n\nYour recurring subscription mandate of Rs. 499 was declined by your issuer bank.\nPlease authorize a fresh payment or update your mandate using our secure portal:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_59939663\n\nThank you,\nAccount Management Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.515764"
+  },
+  {
+    "payment_id": "pay_syn_0054_6198",
+    "customer_id": "CUST_0054",
+    "customer_name": "Pari Bhat",
+    "amount": 1200.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_FRAUD_BLOCK_59",
+    "error_description": "Security perimeter triggered: Velocity threshold breached on merchant endpoint.",
+    "classified_failure_type": "fraud_suspected",
+    "confidence": 0.95,
+    "classification_reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator.",
+    "action_taken": "escalate_fraud_review",
+    "rule_fired": "RULE_2_FRAUD_BLOCK",
+    "policy_reason": "High risk or suspicious activity detected. Immediate human security escalation.",
+    "delay_hours": 0,
+    "requires_human_review": true,
+    "escalation_reason": "Suspected fraudulent pattern or risk engine rejection.",
+    "outcome": "escalated",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:39.585991"
+  },
+  {
+    "payment_id": "pay_syn_0055_8373",
+    "customer_id": "CUST_0055",
+    "customer_name": "Ayaan Rao",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_73841665",
+      "short_url": "https://rzp.io/i/plink_test_73841665",
+      "amount_inr": 4999.0,
+      "raw_response": {
+        "id": "plink_test_73841665",
+        "amount": 499900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_73841665",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ayaan, your payment of Rs. 4,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_73841665",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Ayaan,\n\nYour payment of Rs. 4,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_73841665\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.645811"
+  },
+  {
+    "payment_id": "pay_syn_0056_2269",
+    "customer_id": "CUST_0056",
+    "customer_name": "Krishna Rao",
+    "amount": 750.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_10367544",
+      "short_url": "https://rzp.io/i/plink_test_10367544",
+      "amount_inr": 750.0,
+      "raw_response": {
+        "id": "plink_test_10367544",
+        "amount": 75000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_10367544",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Krishna, your payment of Rs. 750 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_10367544",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Krishna,\n\nYour payment of Rs. 750 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_10367544\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.710263"
+  },
+  {
+    "payment_id": "pay_syn_0057_3503",
+    "customer_id": "CUST_0057",
+    "customer_name": "Muhammad Patel",
+    "amount": 750.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_56554790",
+      "short_url": "https://rzp.io/i/plink_test_56554790",
+      "amount_inr": 750.0,
+      "raw_response": {
+        "id": "plink_test_56554790",
+        "amount": 75000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_56554790",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Muhammad, your payment of Rs. 750 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_56554790",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Muhammad,\n\nYour payment of Rs. 750 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_56554790\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.766920"
+  },
+  {
+    "payment_id": "pay_syn_0058_7381",
+    "customer_id": "CUST_0058",
+    "customer_name": "Riya Sharma",
+    "amount": 1200.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_68425357",
+      "short_url": "https://rzp.io/i/plink_test_68425357",
+      "amount_inr": 1200.0,
+      "raw_response": {
+        "id": "plink_test_68425357",
+        "amount": 120000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_68425357",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Riya, your payment of Rs. 1,200 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_68425357",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Riya,\n\nYour payment of Rs. 1,200 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_68425357\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.822960"
+  },
+  {
+    "payment_id": "pay_syn_0059_7865",
+    "customer_id": "CUST_0059",
+    "customer_name": "Isha Menon",
+    "amount": 999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_48410657",
+      "short_url": "https://rzp.io/i/plink_test_48410657",
+      "amount_inr": 999.0,
+      "raw_response": {
+        "id": "plink_test_48410657",
+        "amount": 99900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_48410657",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Isha, your payment of Rs. 999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_48410657",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Isha,\n\nYour payment of Rs. 999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_48410657\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.880417"
+  },
+  {
+    "payment_id": "pay_syn_0060_6507",
+    "customer_id": "CUST_0060",
+    "customer_name": "Ananya Nair",
+    "amount": 1499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "NPCI_TIMEOUT_96",
+    "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:39.940406"
+  },
+  {
+    "payment_id": "pay_syn_0061_1444",
+    "customer_id": "CUST_0061",
+    "customer_name": "Aditya Kaur",
+    "amount": 350.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_CARD_INVALID",
+    "error_description": "Payment instrument invalid: Card valid-thru date has passed.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_44029290",
+      "short_url": "https://rzp.io/i/plink_test_44029290",
+      "amount_inr": 350.0,
+      "raw_response": {
+        "id": "plink_test_44029290",
+        "amount": 35000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_44029290",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aditya, your payment of Rs. 350 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_44029290",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Aditya,\n\nYour payment of Rs. 350 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_44029290\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:39.988305"
+  },
+  {
+    "payment_id": "pay_syn_0062_6355",
+    "customer_id": "CUST_0062",
+    "customer_name": "Diya Singh",
+    "amount": 750.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "ISO_8583_DECLINE_54",
+    "error_description": "Card tokenization expired. Issuer rejected debit due to card expiry MM/YY.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_70804463",
+      "short_url": "https://rzp.io/i/plink_test_70804463",
+      "amount_inr": 750.0,
+      "raw_response": {
+        "id": "plink_test_70804463",
+        "amount": 75000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_70804463",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Diya, your recent payment of Rs. 750 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_70804463",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Diya,\n\nWe noticed that your latest payment of Rs. 750 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_70804463\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.047573"
+  },
+  {
+    "payment_id": "pay_syn_0063_6733",
+    "customer_id": "CUST_0063",
+    "customer_name": "Sai Patel",
+    "amount": 2499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "MANDATE_DEBIT_DECLINED",
+    "error_description": "Recurring e-mandate declined by destination bank: Mandate limit exceeded or mandate inactive.",
+    "classified_failure_type": "mandate_declined",
+    "confidence": 0.94,
+    "classification_reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5C_MANDATE_DECLINED_REAUTH",
+    "policy_reason": "E-mandate declined by bank. Dispatched new payment link for re-authorization.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_21076253",
+      "short_url": "https://rzp.io/i/plink_test_21076253",
+      "amount_inr": 2499.0,
+      "raw_response": {
+        "id": "plink_test_21076253",
+        "amount": 249900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_21076253",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Sai, your recurring mandate for Rs. 2,499 was declined by your bank. Re-authorize your payment here: https://rzp.io/i/plink_test_21076253",
+      "email_subject": "Mandate Re-authorization Needed",
+      "email_body": "Dear Sai,\n\nYour recurring subscription mandate of Rs. 2,499 was declined by your issuer bank.\nPlease authorize a fresh payment or update your mandate using our secure portal:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_21076253\n\nThank you,\nAccount Management Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.100491"
+  },
+  {
+    "payment_id": "pay_syn_0064_3496",
+    "customer_id": "CUST_0064",
+    "customer_name": "Sai Iyer",
+    "amount": 1499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BAD_REQUEST_ERROR",
+    "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_79589330",
+      "short_url": "https://rzp.io/i/plink_test_79589330",
+      "amount_inr": 1499.0,
+      "raw_response": {
+        "id": "plink_test_79589330",
+        "amount": 149900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_79589330",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Sai, your payment of Rs. 1,499 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_79589330",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Sai,\n\nYour payment of Rs. 1,499 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_79589330\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.159103"
+  },
+  {
+    "payment_id": "pay_syn_0065_3749",
+    "customer_id": "CUST_0065",
+    "customer_name": "Avani Bhat",
+    "amount": 799.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_68273348",
+      "short_url": "https://rzp.io/i/plink_test_68273348",
+      "amount_inr": 799.0,
+      "raw_response": {
+        "id": "plink_test_68273348",
+        "amount": 79900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_68273348",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Avani, your payment of Rs. 799 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_68273348",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Avani,\n\nYour payment of Rs. 799 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_68273348\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.206780"
+  },
+  {
+    "payment_id": "pay_syn_0066_7149",
+    "customer_id": "CUST_0066",
+    "customer_name": "Ananya Reddy",
+    "amount": 299.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "TLS_HANDSHAKE_RESET",
+    "error_description": "TCP connection reset by peer during 3DS challenge redirection.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_78644136",
+      "short_url": "https://rzp.io/i/plink_test_78644136",
+      "amount_inr": 299.0,
+      "raw_response": {
+        "id": "plink_test_78644136",
+        "amount": 29900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_78644136",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ananya, your payment of Rs. 299 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_78644136",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Ananya,\n\nYour payment of Rs. 299 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_78644136\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.260502"
+  },
+  {
+    "payment_id": "pay_syn_0067_2983",
+    "customer_id": "CUST_0067",
+    "customer_name": "Riya Verma",
+    "amount": 3499.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "TLS_HANDSHAKE_RESET",
+    "error_description": "TCP connection reset by peer during 3DS challenge redirection.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_33945727",
+      "short_url": "https://rzp.io/i/plink_test_33945727",
+      "amount_inr": 3499.0,
+      "raw_response": {
+        "id": "plink_test_33945727",
+        "amount": 349900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_33945727",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Riya, your payment of Rs. 3,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_33945727",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Riya,\n\nYour payment of Rs. 3,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_33945727\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.323326"
+  },
+  {
+    "payment_id": "pay_syn_0068_7882",
+    "customer_id": "CUST_0068",
+    "customer_name": "Chiara Mehta",
+    "amount": 3499.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_ERROR",
+    "error_description": "Issuer bank payment gateway did not respond within the 45-second timeout window.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_39520550",
+      "short_url": "https://rzp.io/i/plink_test_39520550",
+      "amount_inr": 3499.0,
+      "raw_response": {
+        "id": "plink_test_39520550",
+        "amount": 349900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_39520550",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Chiara, your payment of Rs. 3,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_39520550",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Chiara,\n\nYour payment of Rs. 3,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_39520550\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.379394"
+  },
+  {
+    "payment_id": "pay_syn_0069_9548",
+    "customer_id": "CUST_0069",
+    "customer_name": "Ayaan Bhat",
+    "amount": 1200.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_CARD_INVALID",
+    "error_description": "Payment instrument invalid: Card valid-thru date has passed.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_43815111",
+      "short_url": "https://rzp.io/i/plink_test_43815111",
+      "amount_inr": 1200.0,
+      "raw_response": {
+        "id": "plink_test_43815111",
+        "amount": 120000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_43815111",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ayaan, your payment of Rs. 1,200 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_43815111",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Ayaan,\n\nYour payment of Rs. 1,200 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_43815111\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.433923"
+  },
+  {
+    "payment_id": "pay_syn_0070_5022",
+    "customer_id": "CUST_0070",
+    "customer_name": "Aditya Gupta",
+    "amount": 2499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "NPCI_TIMEOUT_96",
+    "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_10956147",
+      "short_url": "https://rzp.io/i/plink_test_10956147",
+      "amount_inr": 2499.0,
+      "raw_response": {
+        "id": "plink_test_10956147",
+        "amount": 249900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_10956147",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aditya, your payment of Rs. 2,499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_10956147",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Aditya,\n\nYour payment of Rs. 2,499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_10956147\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.499993"
+  },
+  {
+    "payment_id": "pay_syn_0071_1470",
+    "customer_id": "CUST_0071",
+    "customer_name": "Chiara Bose",
+    "amount": 350.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "NPCI_TIMEOUT_96",
+    "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_30005280",
+      "short_url": "https://rzp.io/i/plink_test_30005280",
+      "amount_inr": 350.0,
+      "raw_response": {
+        "id": "plink_test_30005280",
+        "amount": 35000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_30005280",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Chiara, your payment of Rs. 350 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_30005280",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Chiara,\n\nYour payment of Rs. 350 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_30005280\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.570050"
+  },
+  {
+    "payment_id": "pay_syn_0072_5526",
+    "customer_id": "CUST_0072",
+    "customer_name": "Isha Sharma",
+    "amount": 299.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "GATEWAY_CARD_INVALID",
+    "error_description": "Payment instrument invalid: Card valid-thru date has passed.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_28087510",
+      "short_url": "https://rzp.io/i/plink_test_28087510",
+      "amount_inr": 299.0,
+      "raw_response": {
+        "id": "plink_test_28087510",
+        "amount": 29900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_28087510",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Isha, your payment of Rs. 299 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_28087510",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Isha,\n\nYour payment of Rs. 299 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_28087510\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.632102"
+  },
+  {
+    "payment_id": "pay_syn_0073_8800",
+    "customer_id": "CUST_0073",
+    "customer_name": "Chiara Deshmukh",
+    "amount": 799.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "GATEWAY_ERROR",
+    "error_description": "Issuer bank payment gateway did not respond within the 45-second timeout window.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_54196447",
+      "short_url": "https://rzp.io/i/plink_test_54196447",
+      "amount_inr": 799.0,
+      "raw_response": {
+        "id": "plink_test_54196447",
+        "amount": 79900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_54196447",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Chiara, your payment of Rs. 799 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_54196447",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Chiara,\n\nYour payment of Rs. 799 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_54196447\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.701629"
+  },
+  {
+    "payment_id": "pay_syn_0074_8753",
+    "customer_id": "CUST_0074",
+    "customer_name": "Isha Pillai",
+    "amount": 3499.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_58288686",
+      "short_url": "https://rzp.io/i/plink_test_58288686",
+      "amount_inr": 3499.0,
+      "raw_response": {
+        "id": "plink_test_58288686",
+        "amount": 349900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_58288686",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Isha, your payment of Rs. 3,499 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_58288686",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Isha,\n\nYour payment of Rs. 3,499 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_58288686\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.770798"
+  },
+  {
+    "payment_id": "pay_syn_0075_6023",
+    "customer_id": "CUST_0075",
+    "customer_name": "Ayaan Rao",
+    "amount": 799.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "NPCI_UPI_MANDATE_U69",
+    "error_description": "UPI Autopay mandate execution failed: Mandate paused or revoked by user in PSP app.",
+    "classified_failure_type": "mandate_declined",
+    "confidence": 0.94,
+    "classification_reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5C_MANDATE_DECLINED_REAUTH",
+    "policy_reason": "E-mandate declined by bank. Dispatched new payment link for re-authorization.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_58245256",
+      "short_url": "https://rzp.io/i/plink_test_58245256",
+      "amount_inr": 799.0,
+      "raw_response": {
+        "id": "plink_test_58245256",
+        "amount": 79900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_58245256",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ayaan, your recurring mandate for Rs. 799 was declined by your bank. Re-authorize your payment here: https://rzp.io/i/plink_test_58245256",
+      "email_subject": "Mandate Re-authorization Needed",
+      "email_body": "Dear Ayaan,\n\nYour recurring subscription mandate of Rs. 799 was declined by your issuer bank.\nPlease authorize a fresh payment or update your mandate using our secure portal:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_58245256\n\nThank you,\nAccount Management Team"
+    },
+    "timestamp": "2026-08-23T13:05:40.836539"
+  },
+  {
+    "payment_id": "pay_syn_0076_4033",
+    "customer_id": "CUST_0076",
+    "customer_name": "Muhammad Reddy",
+    "amount": 750.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_FRAUD_BLOCK_59",
+    "error_description": "Security perimeter triggered: Velocity threshold breached on merchant endpoint.",
+    "classified_failure_type": "fraud_suspected",
+    "confidence": 0.95,
+    "classification_reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator.",
+    "action_taken": "escalate_fraud_review",
+    "rule_fired": "RULE_2_FRAUD_BLOCK",
+    "policy_reason": "High risk or suspicious activity detected. Immediate human security escalation.",
+    "delay_hours": 0,
+    "requires_human_review": true,
+    "escalation_reason": "Suspected fraudulent pattern or risk engine rejection.",
+    "outcome": "escalated",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:40.907982"
+  },
+  {
+    "payment_id": "pay_syn_0077_2647",
+    "customer_id": "CUST_0077",
+    "customer_name": "Muhammad Malhotra",
+    "amount": 350.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "NPCI_TIMEOUT_96",
+    "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:40.960085"
+  },
+  {
+    "payment_id": "pay_syn_0078_1745",
+    "customer_id": "CUST_0078",
+    "customer_name": "Vivaan Menon",
+    "amount": 1999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "NPCI_TIMEOUT_96",
+    "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_86660020",
+      "short_url": "https://rzp.io/i/plink_test_86660020",
+      "amount_inr": 1999.0,
+      "raw_response": {
+        "id": "plink_test_86660020",
+        "amount": 199900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_86660020",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Vivaan, your payment of Rs. 1,999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_86660020",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Vivaan,\n\nYour payment of Rs. 1,999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_86660020\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.022290"
+  },
+  {
+    "payment_id": "pay_syn_0079_8690",
+    "customer_id": "CUST_0079",
+    "customer_name": "Chiara Deshmukh",
+    "amount": 299.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_79748242",
+      "short_url": "https://rzp.io/i/plink_test_79748242",
+      "amount_inr": 299.0,
+      "raw_response": {
+        "id": "plink_test_79748242",
+        "amount": 29900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_79748242",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Chiara, your payment of Rs. 299 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_79748242",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Chiara,\n\nYour payment of Rs. 299 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_79748242\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.075350"
+  },
+  {
+    "payment_id": "pay_syn_0080_7565",
+    "customer_id": "CUST_0080",
+    "customer_name": "Chiara Patel",
+    "amount": 499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "CARD_EXPIRED_ERROR",
+    "error_description": "Card validity date has lapsed or card has been deactivated by the cardholder bank.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_32210891",
+      "short_url": "https://rzp.io/i/plink_test_32210891",
+      "amount_inr": 499.0,
+      "raw_response": {
+        "id": "plink_test_32210891",
+        "amount": 49900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_32210891",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Chiara, your recent payment of Rs. 499 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_32210891",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Chiara,\n\nWe noticed that your latest payment of Rs. 499 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_32210891\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.138681"
+  },
+  {
+    "payment_id": "pay_syn_0081_5066",
+    "customer_id": "CUST_0081",
+    "customer_name": "Vihaan Menon",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "RISK_ENGINE_REJECTED",
+    "error_description": "Transaction rejected by fraud detection engine: suspicious IP velocity and unusual payment pattern.",
+    "classified_failure_type": "fraud_suspected",
+    "confidence": 0.95,
+    "classification_reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator.",
+    "action_taken": "escalate_fraud_review",
+    "rule_fired": "RULE_2_FRAUD_BLOCK",
+    "policy_reason": "High risk or suspicious activity detected. Immediate human security escalation.",
+    "delay_hours": 0,
+    "requires_human_review": true,
+    "escalation_reason": "Suspected fraudulent pattern or risk engine rejection.",
+    "outcome": "escalated",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:41.182340"
+  },
+  {
+    "payment_id": "pay_syn_0082_8381",
+    "customer_id": "CUST_0082",
+    "customer_name": "Pari Malhotra",
+    "amount": 750.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_12696656",
+      "short_url": "https://rzp.io/i/plink_test_12696656",
+      "amount_inr": 750.0,
+      "raw_response": {
+        "id": "plink_test_12696656",
+        "amount": 75000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_12696656",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Pari, your payment of Rs. 750 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_12696656",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Pari,\n\nYour payment of Rs. 750 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_12696656\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.250009"
+  },
+  {
+    "payment_id": "pay_syn_0083_2625",
+    "customer_id": "CUST_0083",
+    "customer_name": "Muhammad Reddy",
+    "amount": 499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "HTTP_GATEWAY_TIMEOUT_504",
+    "error_description": "Core banking system (CBS) response deadline exceeded during debit authentication.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_92763632",
+      "short_url": "https://rzp.io/i/plink_test_92763632",
+      "amount_inr": 499.0,
+      "raw_response": {
+        "id": "plink_test_92763632",
+        "amount": 49900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_92763632",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Muhammad, your payment of Rs. 499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_92763632",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Muhammad,\n\nYour payment of Rs. 499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_92763632\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.328470"
+  },
+  {
+    "payment_id": "pay_syn_0084_7693",
+    "customer_id": "CUST_0084",
+    "customer_name": "Pari Bhat",
+    "amount": 150.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BAD_REQUEST_ERROR",
+    "error_description": "Transaction failed: Customer account has insufficient funds/balance for debit.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_90198800",
+      "short_url": "https://rzp.io/i/plink_test_90198800",
+      "amount_inr": 150.0,
+      "raw_response": {
+        "id": "plink_test_90198800",
+        "amount": 15000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_90198800",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Pari, your payment of Rs. 150 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_90198800",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Pari,\n\nYour payment of Rs. 150 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_90198800\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.397947"
+  },
+  {
+    "payment_id": "pay_syn_0085_2166",
+    "customer_id": "CUST_0085",
+    "customer_name": "Sai Gupta",
+    "amount": 999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_89492634",
+      "short_url": "https://rzp.io/i/plink_test_89492634",
+      "amount_inr": 999.0,
+      "raw_response": {
+        "id": "plink_test_89492634",
+        "amount": 99900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_89492634",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Sai, your payment of Rs. 999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_89492634",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Sai,\n\nYour payment of Rs. 999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_89492634\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.467203"
+  },
+  {
+    "payment_id": "pay_syn_0086_3330",
+    "customer_id": "CUST_0086",
+    "customer_name": "Aditya Verma",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "NPCI_TIMEOUT_96",
+    "error_description": "NPCI UPI Switch timeout: Transaction timed out awaiting response from beneficiary bank.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_71747358",
+      "short_url": "https://rzp.io/i/plink_test_71747358",
+      "amount_inr": 2500.0,
+      "raw_response": {
+        "id": "plink_test_71747358",
+        "amount": 250000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_71747358",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aditya, your payment of Rs. 2,500 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_71747358",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Aditya,\n\nYour payment of Rs. 2,500 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_71747358\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.541210"
+  },
+  {
+    "payment_id": "pay_syn_0087_5982",
+    "customer_id": "CUST_0087",
+    "customer_name": "Ananya Gupta",
+    "amount": 1200.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "ISO_8583_DECLINE_54",
+    "error_description": "Card tokenization expired. Issuer rejected debit due to card expiry MM/YY.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "create_payment_link",
+    "rule_fired": "RULE_5B_EXPIRED_CARD_PAYMENT_LINK",
+    "policy_reason": "Card validity expired. Automated payment link generation for customer payment update.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_26130415",
+      "short_url": "https://rzp.io/i/plink_test_26130415",
+      "amount_inr": 1200.0,
+      "raw_response": {
+        "id": "plink_test_26130415",
+        "amount": 120000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_26130415",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ananya, your recent payment of Rs. 1,200 could not be processed as your card has expired. Update your payment method securely here: https://rzp.io/i/plink_test_26130415",
+      "email_subject": "Action Required: Update payment method for your subscription",
+      "email_body": "Dear Ananya,\n\nWe noticed that your latest payment of Rs. 1,200 could not be completed because your card on file has expired.\nTo prevent any disruption to your service, please click the secure Razorpay link below to update your payment details or use UPI/NetBanking:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_26130415\n\nThank you,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.601502"
+  },
+  {
+    "payment_id": "pay_syn_0088_6280",
+    "customer_id": "CUST_0088",
+    "customer_name": "Avani Gupta",
+    "amount": 499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "TLS_HANDSHAKE_RESET",
+    "error_description": "TCP connection reset by peer during 3DS challenge redirection.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_73201902",
+      "short_url": "https://rzp.io/i/plink_test_73201902",
+      "amount_inr": 499.0,
+      "raw_response": {
+        "id": "plink_test_73201902",
+        "amount": 49900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_73201902",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Avani, your payment of Rs. 499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_73201902",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Avani,\n\nYour payment of Rs. 499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_73201902\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.670838"
+  },
+  {
+    "payment_id": "pay_syn_0089_5415",
+    "customer_id": "CUST_0089",
+    "customer_name": "Riya Verma",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "GATEWAY_ERROR",
+    "error_description": "Issuer bank payment gateway did not respond within the 45-second timeout window.",
+    "classified_failure_type": "bank_timeout",
+    "confidence": 0.92,
+    "classification_reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5D_BANK_TIMEOUT_IMMEDIATE_RETRY",
+    "policy_reason": "Issuer bank timeout detected. Instant retry via fresh payment link or gateway retry.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_84801900",
+      "short_url": "https://rzp.io/i/plink_test_84801900",
+      "amount_inr": 2500.0,
+      "raw_response": {
+        "id": "plink_test_84801900",
+        "amount": 250000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_84801900",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Riya, your payment of Rs. 2,500 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_84801900",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Riya,\n\nYour payment of Rs. 2,500 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_84801900\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.733827"
+  },
+  {
+    "payment_id": "pay_syn_0090_9056",
+    "customer_id": "CUST_0090",
+    "customer_name": "Aditya Choudhury",
+    "amount": 750.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_15008230",
+      "short_url": "https://rzp.io/i/plink_test_15008230",
+      "amount_inr": 750.0,
+      "raw_response": {
+        "id": "plink_test_15008230",
+        "amount": 75000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_15008230",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aditya, your payment of Rs. 750 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_15008230",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Aditya,\n\nYour payment of Rs. 750 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_15008230\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.800541"
+  },
+  {
+    "payment_id": "pay_syn_0091_7744",
+    "customer_id": "CUST_0091",
+    "customer_name": "Chiara Malhotra",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BANK_SWITCH_91",
+    "error_description": "Issuer bank system down/inoperative during processing window.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:41.872862"
+  },
+  {
+    "payment_id": "pay_syn_0092_6296",
+    "customer_id": "CUST_0092",
+    "customer_name": "Vihaan Singh",
+    "amount": 1999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_68514599",
+      "short_url": "https://rzp.io/i/plink_test_68514599",
+      "amount_inr": 1999.0,
+      "raw_response": {
+        "id": "plink_test_68514599",
+        "amount": 199900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_68514599",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Vihaan, your payment of Rs. 1,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_68514599",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Vihaan,\n\nYour payment of Rs. 1,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_68514599\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.927778"
+  },
+  {
+    "payment_id": "pay_syn_0093_9167",
+    "customer_id": "CUST_0093",
+    "customer_name": "Pari Verma",
+    "amount": 2500.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "BANK_DEBIT_DECLINE_51",
+    "error_description": "Issuer bank decline code 51: Insufficient funds in linked savings/current account.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_96001956",
+      "short_url": "https://rzp.io/i/plink_test_96001956",
+      "amount_inr": 2500.0,
+      "raw_response": {
+        "id": "plink_test_96001956",
+        "amount": 250000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_96001956",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Pari, your payment of Rs. 2,500 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_96001956",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Pari,\n\nYour payment of Rs. 2,500 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_96001956\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:41.999933"
+  },
+  {
+    "payment_id": "pay_syn_0094_8941",
+    "customer_id": "CUST_0094",
+    "customer_name": "Vihaan Sharma",
+    "amount": 1999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "GATEWAY_CARD_INVALID",
+    "error_description": "Payment instrument invalid: Card valid-thru date has passed.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_77231211",
+      "short_url": "https://rzp.io/i/plink_test_77231211",
+      "amount_inr": 1999.0,
+      "raw_response": {
+        "id": "plink_test_77231211",
+        "amount": 199900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_77231211",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Vihaan, your payment of Rs. 1,999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_77231211",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Vihaan,\n\nYour payment of Rs. 1,999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_77231211\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:42.057803"
+  },
+  {
+    "payment_id": "pay_syn_0095_2527",
+    "customer_id": "CUST_0095",
+    "customer_name": "Sai Mehta",
+    "amount": 1999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_10213550",
+      "short_url": "https://rzp.io/i/plink_test_10213550",
+      "amount_inr": 1999.0,
+      "raw_response": {
+        "id": "plink_test_10213550",
+        "amount": 199900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_10213550",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Sai, your payment of Rs. 1,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_10213550",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Sai,\n\nYour payment of Rs. 1,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_10213550\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:42.113571"
+  },
+  {
+    "payment_id": "pay_syn_0096_5479",
+    "customer_id": "CUST_0096",
+    "customer_name": "Aadhya Choudhury",
+    "amount": 999.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "ENACH_DECLINE_U30",
+    "error_description": "eNACH standing instruction rejected: Max per-transaction debit limit exceeded.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_46609521",
+      "short_url": "https://rzp.io/i/plink_test_46609521",
+      "amount_inr": 999.0,
+      "raw_response": {
+        "id": "plink_test_46609521",
+        "amount": 99900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_46609521",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Aadhya, your payment of Rs. 999 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_46609521",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Aadhya,\n\nYour payment of Rs. 999 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_46609521\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:42.179310"
+  },
+  {
+    "payment_id": "pay_syn_0097_2143",
+    "customer_id": "CUST_0097",
+    "customer_name": "Ayaan Kaur",
+    "amount": 4999.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "NPCI_RESP_114",
+    "error_description": "NPCI Debit decline: Available balance below requested transaction amount.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_51691907",
+      "short_url": "https://rzp.io/i/plink_test_51691907",
+      "amount_inr": 4999.0,
+      "raw_response": {
+        "id": "plink_test_51691907",
+        "amount": 499900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_51691907",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ayaan, your payment of Rs. 4,999 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_51691907",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Ayaan,\n\nYour payment of Rs. 4,999 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_51691907\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:42.233269"
+  },
+  {
+    "payment_id": "pay_syn_0098_3434",
+    "customer_id": "CUST_0098",
+    "customer_name": "Pari Menon",
+    "amount": 750.0,
+    "currency": "INR",
+    "payment_type": "one_time",
+    "failure_code": "PAYMENT_CANCELLED_LOW_BALANCE",
+    "error_description": "Customer debit account lacked minimum clearing balance at scheduled time.",
+    "classified_failure_type": "insufficient_funds",
+    "confidence": 0.93,
+    "classification_reasoning": "[Rule Baseline] Matched low balance or NPCI decline 114 / Bank 51.",
+    "action_taken": "schedule_delayed_retry",
+    "rule_fired": "RULE_5A_INSUFFICIENT_FUNDS_SALARY_CYCLE",
+    "policy_reason": "Insufficient balance detected. Scheduled retry with 72h cooldown for fund replenishment.",
+    "delay_hours": 72,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_52286478",
+      "short_url": "https://rzp.io/i/plink_test_52286478",
+      "amount_inr": 750.0,
+      "raw_response": {
+        "id": "plink_test_52286478",
+        "amount": 75000,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_52286478",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Pari, your payment of Rs. 750 didn't go through due to a balance issue. We will retry in 3 days, or you can pay now: https://rzp.io/i/plink_test_52286478",
+      "email_subject": "Payment reminder: Your pending transaction",
+      "email_body": "Dear Pari,\n\nYour payment of Rs. 750 was unsuccessful due to insufficient account balance.\nWe will automatically re-attempt the charge in 3 days. If you prefer to complete the payment immediately via an alternate account or UPI, please use this link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_52286478\n\nBest regards,\nCustomer Support Team"
+    },
+    "timestamp": "2026-08-23T13:05:42.302518"
+  },
+  {
+    "payment_id": "pay_syn_0099_4090",
+    "customer_id": "CUST_0099",
+    "customer_name": "Sai Joshi",
+    "amount": 2499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "ISO_8583_DECLINE_54",
+    "error_description": "Card tokenization expired. Issuer rejected debit due to card expiry MM/YY.",
+    "classified_failure_type": "expired_card",
+    "confidence": 0.96,
+    "classification_reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54.",
+    "action_taken": "suppress_opt_out",
+    "rule_fired": "RULE_1_CONSENT_OPT_OUT",
+    "policy_reason": "Customer has opted out of outbound transaction recovery notifications.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "opt_out_suppressed",
+    "verification": "not_applicable",
+    "action_details": {},
+    "customer_notification": {},
+    "timestamp": "2026-08-23T13:05:42.364569"
+  },
+  {
+    "payment_id": "pay_syn_0100_7246",
+    "customer_id": "CUST_0100",
+    "customer_name": "Ananya Iyer",
+    "amount": 499.0,
+    "currency": "INR",
+    "payment_type": "subscription",
+    "failure_code": "ENACH_DECLINE_U30",
+    "error_description": "eNACH standing instruction rejected: Max per-transaction debit limit exceeded.",
+    "classified_failure_type": "technical_error",
+    "confidence": 0.75,
+    "classification_reasoning": "[Rule Baseline] Matched transient bank switch / network reset error.",
+    "action_taken": "retry_payment_link",
+    "rule_fired": "RULE_5E_TECH_ERROR_IMMEDIATE_RETRY",
+    "policy_reason": "Transient switch error detected. Instant retry via fallback route.",
+    "delay_hours": 0,
+    "requires_human_review": false,
+    "escalation_reason": null,
+    "outcome": "action_dispatched",
+    "verification": "dispatched_pending",
+    "action_details": {
+      "status": "success",
+      "mode": "sandbox_simulated",
+      "payment_link_id": "plink_test_50248018",
+      "short_url": "https://rzp.io/i/plink_test_50248018",
+      "amount_inr": 499.0,
+      "raw_response": {
+        "id": "plink_test_50248018",
+        "amount": 49900,
+        "currency": "INR",
+        "short_url": "https://rzp.io/i/plink_test_50248018",
+        "status": "created"
+      }
+    },
+    "customer_notification": {
+      "channel_sms": "Hi Ananya, your payment of Rs. 499 timed out due to bank network latency. Complete it seamlessly with one click: https://rzp.io/i/plink_test_50248018",
+      "email_subject": "Payment retry: Complete your transaction",
+      "email_body": "Dear Ananya,\n\nYour payment of Rs. 499 experienced a temporary bank network switch timeout.\nNo funds were deducted. You can complete your transaction securely via this instant link:\n\n\ud83d\udc49 https://rzp.io/i/plink_test_50248018\n\nWarm regards,\nSupport Team"
+    },
+    "timestamp": "2026-08-23T13:05:42.431088"
   }
 ]

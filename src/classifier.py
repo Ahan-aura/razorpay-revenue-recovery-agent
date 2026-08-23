@@ -125,12 +125,16 @@ Return strict JSON classification.
                     res["engine_used"] = self.active_engine
                     return res
                 except Exception as e:
-                    attempt += 1
                     err_str = str(e).lower()
-                    if "429" in err_str or "quota" in err_str:
-                        wait_time = 4.0 * attempt
-                    else:
-                        wait_time = 1.0 * (2 ** (attempt - 1))
+                    if "quota" in err_str or "429" in err_str:
+                        logger.warning(f"API daily/rate limit reached: {e}. Switching seamlessly to deterministic baseline for remaining records.")
+                        self.active_engine = "deterministic_keyword_baseline"
+                        fallback = self._baseline_rule_classifier(payment_event)
+                        fallback["engine_used"] = "deterministic_keyword_baseline"
+                        return fallback
+                    
+                    attempt += 1
+                    wait_time = 1.0 * (2 ** (attempt - 1))
                     logger.warning(f"LLM attempt {attempt} failed: {e}. Retrying in {wait_time}s...")
                     time.sleep(wait_time)
 

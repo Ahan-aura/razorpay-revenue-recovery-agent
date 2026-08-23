@@ -1,6 +1,6 @@
 {
-  "engine_evaluated": "llm_gemini_3_6_flash",
-  "evaluation_type_note": "Evaluated using Live Semantic LLM Diagnostic Inferences (llm_gemini_3_6_flash).",
+  "engine_evaluated": "deterministic_keyword_baseline",
+  "evaluation_type_note": "Evaluated using Deterministic Keyword & Error-Code Baseline Classifier (Offline Fallback mode, no LLM API key loaded).",
   "sample_size": 20,
   "sample_size_note": "Evaluated on hand-labeled held-out test partition (20 rows)",
   "accuracy_pct": 90.0,
@@ -18,55 +18,55 @@
       "payment_id": "pay_syn_0001_5506",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
-      "confidence": 1.0,
+      "confidence": 0.92,
       "is_correct": true,
-      "engine_used": "llm_gemini_3_6_flash",
-      "reasoning": "The transaction failed because the issuer bank's gateway did not respond within the 45-second timeout threshold."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
       "payment_id": "pay_syn_0083_2625",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
-      "confidence": 0.98,
+      "confidence": 0.92,
       "is_correct": true,
-      "engine_used": "llm_gemini_3_6_flash",
-      "reasoning": "The core banking system (CBS) failed to respond within the required deadline during debit authentication, resulting in a gateway latency timeout."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
       "payment_id": "pay_syn_0077_2647",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
-      "confidence": 0.98,
+      "confidence": 0.92,
       "is_correct": true,
-      "engine_used": "llm_gemini_3_6_flash",
-      "reasoning": "The error code and description explicitly indicate an NPCI UPI Switch timeout caused by the beneficiary bank's unresponsiveness."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
       "payment_id": "pay_syn_0005_8527",
       "ground_truth": "bank_timeout",
       "predicted": "bank_timeout",
-      "confidence": 1.0,
+      "confidence": 0.92,
       "is_correct": true,
-      "engine_used": "llm_gemini_3_6_flash",
-      "reasoning": "The payment failed because the issuer bank gateway did not respond within the 45-second timeout threshold, indicating bank switch unresponsiveness."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched issuer/NPCI gateway response deadline timeout."
     },
     {
       "payment_id": "pay_syn_0002_2535",
       "ground_truth": "expired_card",
       "predicted": "expired_card",
-      "confidence": 1.0,
+      "confidence": 0.96,
       "is_correct": true,
-      "engine_used": "llm_gemini_3_6_flash",
-      "reasoning": "The transaction failed directly due to an expired card or lapsed validity date as indicated by the CARD_EXPIRED_ERROR code."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54."
     },
     {
       "payment_id": "pay_syn_0004_4527",
       "ground_truth": "expired_card",
       "predicted": "expired_card",
-      "confidence": 1.0,
+      "confidence": 0.96,
       "is_correct": true,
-      "engine_used": "llm_gemini_3_6_flash",
-      "reasoning": "The payment failed because the customer's card validity date has lapsed or the card was deactivated by the issuing bank."
+      "engine_used": "deterministic_keyword_baseline",
+      "reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54."
     },
     {
       "payment_id": "pay_syn_0027_3697",
@@ -74,7 +74,7 @@
       "predicted": "expired_card",
       "confidence": 0.96,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched card validity lapse or ISO 8583 decline 54."
     },
     {
@@ -83,7 +83,7 @@
       "predicted": "technical_error",
       "confidence": 0.75,
       "is_correct": false,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
     },
     {
@@ -92,7 +92,7 @@
       "predicted": "mandate_declined",
       "confidence": 0.94,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error."
     },
     {
@@ -101,7 +101,7 @@
       "predicted": "mandate_declined",
       "confidence": 0.94,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error."
     },
     {
@@ -110,7 +110,7 @@
       "predicted": "mandate_declined",
       "confidence": 0.94,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched NPCI mandate decline / eNACH standing instruction error."
     },
     {
@@ -119,7 +119,7 @@
       "predicted": "technical_error",
       "confidence": 0.75,
       "is_correct": false,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
     },
     {
@@ -128,7 +128,7 @@
       "predicted": "technical_error",
       "confidence": 0.75,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
     },
     {
@@ -137,7 +137,7 @@
       "predicted": "technical_error",
       "confidence": 0.75,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
     },
     {
@@ -146,7 +146,7 @@
       "predicted": "technical_error",
       "confidence": 0.75,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
     },
     {
@@ -155,7 +155,7 @@
       "predicted": "technical_error",
       "confidence": 0.75,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Matched transient bank switch / network reset error."
     },
     {
@@ -164,7 +164,7 @@
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     },
     {
@@ -173,7 +173,7 @@
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     },
     {
@@ -182,7 +182,7 @@
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     },
     {
@@ -191,7 +191,7 @@
       "predicted": "fraud_suspected",
       "confidence": 0.95,
       "is_correct": true,
-      "engine_used": "fallback_after_llm_timeout",
+      "engine_used": "deterministic_keyword_baseline",
       "reasoning": "[Rule Baseline] Triggered by fraud/risk engine code or security velocity indicator."
     }
   ]

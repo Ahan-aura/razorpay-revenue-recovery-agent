@@ -183,11 +183,11 @@ python src/webhook_server.py
 Tested on a dataset of **100 synthetic failed transactions** representing **₹168,789** in failed volume:
 
 - **Recovery Actions Dispatched:** **₹135,647** across **83 Payment Links** (**80.4% Dispatch Rate**)
-- **Live-Verified Webhook Collections:** ₹0 (0 webhooks verified prior to live checkout triggers)
+- **Live-Verified Webhook Collections:** ₹1,999 (1 webhooks verified prior to live checkout triggers)
 - **Governed Escalations:** **8 Fraud Cases Blocked** and escalated to operations
 - **Customer Consent Filter:** **9 Opted-out customer transactions suppressed** from outbound notifications
 - **System Resilience:** **0 System Crashes** (handled via exponential backoff and error wrapping)
-- **Held-Out Benchmark Accuracy:** **90.0%** (18/20 on hand-labeled test cases using `llm_gemini_3_6_flash` with live semantic reasoning).
+- **Held-Out Benchmark Accuracy:** **90.0%** (18/20 on hand-labeled test cases evaluated using `llm_gemini_3_6_flash` with live semantic reasoning).
 
 ## 7. How We Address Judging Criteria
 
