@@ -180,16 +180,14 @@ python src/webhook_server.py
 
 ## 6. Live Benchmark & Evaluation Results
 
-Tested on a dataset of **100 synthetic failed transactions** representing **₹138,928** in failed volume:
+Tested on a dataset of **100 synthetic failed transactions** representing **₹168,789** in failed volume:
 
-- **Recovery Actions Dispatched:** **₹118,333** across **91 Payment Links** (**85.18% Dispatch Rate**)
-- **Live-Verified Webhook Collections:** ₹0 (prior to webhook execution) / Promoted dynamically via webhook listener
+- **Recovery Actions Dispatched:** **₹135,647** across **83 Payment Links** (**80.4% Dispatch Rate**)
+- **Live-Verified Webhook Collections:** ₹0 (0 webhooks verified prior to live checkout triggers)
 - **Governed Escalations:** **8 Fraud Cases Blocked** and escalated to operations
-- **Customer Consent:** **1 Opted-out customer transaction suppressed** from outbound notifications
-- **System Resilience:** **0% System Crashes** (handled via exponential backoff and error wrapping)
-- **Held-Out Benchmark Accuracy:** **100.0%** across 6 root-cause archetypes on 20 hand-labeled test cases (evaluated on deterministic baseline; supports live LLM inference).
-
----
+- **Customer Consent Filter:** **9 Opted-out customer transactions suppressed** from outbound notifications
+- **System Resilience:** **0 System Crashes** (handled via exponential backoff and error wrapping)
+- **Held-Out Benchmark Accuracy:** **90.0%** (18/20 on hand-labeled test cases using `deterministic_keyword_baseline`).
 
 ## 7. How We Address Judging Criteria
 
@@ -210,7 +208,7 @@ Tested on a dataset of **100 synthetic failed transactions** representing **₹1
 2. **Solution & Architecture (0:45 - 2:00):**
    - *"We built an Autonomous Revenue Recovery Agent. It analyzes gateway failure logs using LLM diagnostics, but delegates every single action decision to deterministic policy rules."*
 3. **Live Dashboard Walkthrough (2:00 - 3:30):**
-   - Click **'Run Batch Pipeline Live'** in Streamlit. Show ₹118,333 in recovery actions dispatched across 91 eligible transactions.
+   - Click **'Run Batch Pipeline Live'** in Streamlit. Show ₹135,647 in recovery actions dispatched across 83 eligible transactions (80.4% dispatch rate).
    - Trigger **'Simulate Customer Payment'** to demonstrate real-time promotion to `demo_verified` / `live_verified`.
    - Inspect single transaction showing the diagnostic reasoning, deterministic rule fired, and generated Hinglish SMS copy.
 4. **Governed AI Judgment & Escalation (3:30 - 4:30):**

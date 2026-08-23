@@ -390,9 +390,16 @@ with tab_benchmark:
 with tab_pitch:
     st.subheader("🏆 Pitch Positioning & Judging Criteria Mapping")
     
-    st.markdown("""
+    ad_amt = metrics.get('actions_dispatched', {}).get('amount_inr', 0)
+    ad_cnt = metrics.get('actions_dispatched', {}).get('count', 0)
+    ad_rate = metrics.get('actions_dispatched', {}).get('dispatch_rate_pct', 0)
+    tot_vol = metrics.get('total_failed_volume_inr', 0)
+    tot_rec = metrics.get('total_records', 0)
+    esc_fraud = metrics.get('escalations', {}).get('fraud_blocked', 0)
+
+    st.markdown(f"""
     ### 🎯 The Defensible 1-Sentence Pitch for the Panel:
-    > *"On a batch of 100 failed payments representing ₹138,928, our agent successfully **dispatched recovery workflows for 91 eligible transactions (₹118,333 volume)**, captured real payments via **cryptographic webhooks**, and cleanly **escalated 8 high-risk fraud cases** rather than guessing."*
+    > *"On a batch of {tot_rec} failed payments representing ₹{tot_vol:,.0f}, our agent successfully **dispatched recovery workflows for {ad_cnt} eligible transactions (₹{ad_amt:,.0f} volume, {ad_rate:.1f}% dispatch rate)**, captured real payments via **cryptographic webhooks**, and cleanly **escalated {esc_fraud} high-risk fraud cases** rather than guessing."*
     
     ---
     ### 🌟 How We Address All 4 Judging Criteria (Zero Fluff):

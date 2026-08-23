@@ -1,10 +1,11 @@
 """
 End-to-End Orchestration Pipeline for Failed Payment Recovery Agent
 Orchestrates data ingestion, diagnostics, policy gating, Razorpay actions,
-audit logging, and transparent metric computation.
+audit logging, transparent metric computation, and automatic README metric synchronization.
 """
 
 import os
+import re
 import sys
 import argparse
 import logging
@@ -28,6 +29,61 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
 logger = logging.getLogger("RecoveryPipeline")
+
+
+def sync_readme_metrics(metrics: Dict[str, Any], benchmark_eval: Dict[str, Any]):
+    """
+    Automatically keeps README.md numbers in 100% exact sync with the latest outputs,
+    preventing any possibility of stale or drifted metrics.
+    """
+    readme_path = os.path.join(BASE_DIR, "README.md")
+    if not os.path.exists(readme_path):
+        return
+
+    try:
+        with open(readme_path, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        ad = metrics.get("actions_dispatched", {})
+        lv = metrics.get("live_verified_recoveries", {})
+        esc = metrics.get("escalations", {})
+        total_vol = metrics.get("total_failed_volume_inr", 0)
+        total_txns = metrics.get("total_records", 0)
+        acc_pct = benchmark_eval.get("accuracy_pct", 0)
+        sample_size = benchmark_eval.get("sample_size", 0)
+        engine_eval = benchmark_eval.get("engine_evaluated", "baseline")
+
+        # Dynamic Section 6 replacement block
+        metrics_block = f"""## 6. Live Benchmark & Evaluation Results
+
+Tested on a dataset of **{total_txns} synthetic failed transactions** representing **₹{total_vol:,.0f}** in failed volume:
+
+- **Recovery Actions Dispatched:** **₹{ad.get('amount_inr', 0):,.0f}** across **{ad.get('count', 0)} Payment Links** (**{ad.get('dispatch_rate_pct', 0):.1f}% Dispatch Rate**)
+- **Live-Verified Webhook Collections:** ₹{lv.get('amount_inr', 0):,.0f} ({lv.get('count', 0)} webhooks verified prior to live checkout triggers)
+- **Governed Escalations:** **{esc.get('fraud_blocked', 0)} Fraud Cases Blocked** and escalated to operations
+- **Customer Consent Filter:** **{metrics.get('opt_out_suppressed_count', 0)} Opted-out customer transactions suppressed** from outbound notifications
+- **System Resilience:** **{metrics.get('system_errors_count', 0)} System Crashes** (handled via exponential backoff and error wrapping)
+- **Held-Out Benchmark Accuracy:** **{acc_pct:.1f}%** ({benchmark_eval.get('correct_count', 0)}/{sample_size} on hand-labeled test cases using `{engine_eval}`)."""
+
+        # Replace Section 6 in README
+        pattern = r"## 6\. Live Benchmark & Evaluation Results[\s\S]*?(?=## 7\. How We Address Judging Criteria)"
+        new_content = re.sub(pattern, metrics_block + "\n\n", content)
+
+        # Also update pitch script numbers in Section 8
+        pitch_block = f"""3. **Live Dashboard Walkthrough (2:00 - 3:30):**
+   - Click **'Run Batch Pipeline Live'** in Streamlit. Show ₹{ad.get('amount_inr', 0):,.0f} in recovery actions dispatched across {ad.get('count', 0)} eligible transactions ({ad.get('dispatch_rate_pct', 0):.1f}% dispatch rate).
+   - Trigger **'Simulate Customer Payment'** to demonstrate real-time promotion to `demo_verified` / `live_verified`.
+   - Inspect single transaction showing the diagnostic reasoning, deterministic rule fired, and generated Hinglish SMS copy."""
+
+        pitch_pattern = r"3\. \*\*Live Dashboard Walkthrough \(2:00 - 3:30\):[\s\S]*?(?=4\. \*\*Governed AI Judgment)"
+        new_content = re.sub(pitch_pattern, pitch_block + "\n", new_content)
+
+        with open(readme_path, "w", encoding="utf-8") as f:
+            f.write(new_content)
+
+        logger.info("README.md metrics successfully synchronized with latest execution.")
+    except Exception as e:
+        logger.warning(f"Could not auto-sync README metrics: {e}")
 
 
 class RecoveryAgentPipeline:
@@ -148,6 +204,9 @@ class RecoveryAgentPipeline:
 
         # Step 7: Benchmark accuracy against held-out set
         benchmark_eval = self.metrics_calculator.evaluate_benchmark_accuracy(self.classifier)
+
+        # Step 8: Auto-sync README metrics
+        sync_readme_metrics(metrics, benchmark_eval)
 
         logger.info("Batch execution completed successfully.")
         return {
